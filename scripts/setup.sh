@@ -1,149 +1,119 @@
 #!/bin/bash
-
 set -euo pipefail
 
-if [[ $EUID -eq 0 ]]; then
-    echo "Do not run as root!" >&2
-    exit 1
-fi
+INSTALL_NVIDIA=true
+VERBOSE=false
+APT_FLAGS="-yqq"
 
-echo "Starting installation in:"
+usage() {
+    cat <<EOF
+Usage: ${0##*/} [options]
 
-for n in {5..1}; do
-    echo "$n..."
-    sleep 1
+Options:
+  --no-nvidia             Skip NVIDIA driver installation (only if your driver doesn't support NVIDIA >= 550)
+  --verbose               Show detailed output during installation
+  -h, --help              Show this help message
+
+Examples:
+  ${0##*/}                          # Default
+  ${0##*/} --no-nvidia              # Skip NVIDIA installation
+  ${0##*/} --verbose                # Show output 
+  ${0##*/} --no-nvidia --verbose    # Skip NVIDIA, show output
+EOF
+}
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --no-nvidia)
+            INSTALL_NVIDIA=false
+            shift
+            ;;
+        --verbose)
+            VERBOSE=true
+            APT_FLAGS="-y"
+            shift
+            ;;
+        -h | --help)
+            usage
+            exit 0
+            ;;
+        *)
+            echo "Unknown option: $1" >&2
+            usage >&2
+            exit 1
+            ;;
+    esac
 done
 
-if ! grep -q " contrib" /etc/apt/sources.list; then
-    echo "Adding contrib, non-free, non-free-firmware..."
-    sleep 3
-    sudo sed -i 's/ main/ main contrib non-free non-free-firmware/' /etc/apt/sources.list
-    sudo apt-get update
-else
-    echo "Repositories already configured"
-    sleep 2
-fi
+APT_SOURCES_FILE="/etc/apt/sources.list"
+ADDITIONAL_REPOS=("contrib" "non-free" "non-free-firmware")
 
-clear 
+as_root() {
+    if [[ $EUID -eq 0 ]]; then
+        echo "Do not run as root!" >&2
+        exit 1
+    fi
+}
 
+nvidia() {
+    if [ "$INSTALL_NVIDIA" = false ]; then
+        echo "Skipping NVIDIA installation"
+        return
+    fi
+    
+    sudo apt-get install $APT_FLAGS linux-headers-amd64 build-essential nvidia-detect
+    nvidia-detect
+    sudo apt-get install $APT_FLAGS nvidia-driver
+}
 
-echo "User is: $USER"
-sleep 2
+configure_repos() {
+    sudo cp "$APT_SOURCES_FILE" "$APT_SOURCES_FILE.backup"
 
+    for repo in "${ADDITIONAL_REPOS[@]}"; do
+        if ! sudo grep -q "^deb.*$repo" "$APT_SOURCES_FILE"; then
+            sudo sed -i "/^deb /s/main[[:space:]]*$/main $repo/" "$APT_SOURCES_FILE"
+            echo "Added $repo"
+        else
+            echo "$repo already present"
+        fi
 
-sudo apt-get update && sudo apt-get upgrade -y
-
-while true; do
-    read -p "Install NVIDIA Driver? y/n " confirm
-        case "$confirm"; in
-            [yY] | "")
-                clear
-                echo "Installing NVIDIA drivers..."
-                sleep 2
-                sudo apt-get install -y linux-headers-generic \
-                    build-essential nvidia-detect
-                clear
-                nvidia-detect
-                sudo apt-get install -y nvidia-driver
-                clear
-                echo "NVIDIA driver has been installed."
-                sleep 2
-                break
-                ;;
-            [nN])
-                echo "Not installing NVIDIA drivers..."
-                sleep 1
-                clear
-                break
-                ;;
-            *)
-                echo "Invalid input. Try again. (y/n)"
-                ;;
-         esac
+        if ! sudo grep -q "^deb-src[[:space:]]\+.*$repo" "$APT_SOURCES_FILE"; then
+            sudo sed -i "/^deb-src[[:space:]]\+/s/main[[:space:]]*$/main $repo/" "$APT_SOURCES_FILE"
+            echo "Added $repo"
+        else
+            echo "$repo already present"
+        fi
     done
 
-packages=(
-    gcc git vim tmux \
+    sudo apt-get update $APT_FLAGS
+}
+
+main_pkgs() {
+    sudo apt-get install $APT_FLAGS --no-install-recommends \
+        gcc curl git vim tmux \
         fonts-noto fonts-noto-cjk fonts-noto-cjk-extra fonts-noto-color-emoji \
-        fonts-noto-core ttf-mscorefonts-installer \
+        fonts-noto-core \
         i3 i3status i3lock j4-dmenu-desktop picom dunst feh brightnessctl \
-        xorg xinit x11-server-utils pulseaudio pulseaudio-utils alsa-utils \
-        pavucontrol lxappearace arc-theme papirus-icon-theme network-manager \
-        unzip xdg-utils xdg-user-dirs polkitd gvfs-backends thunar thunar-volman \
+        xorg xinit x11-xserver-utils pulseaudio pulseaudio-utils alsa-utils \
+        pavucontrol lxappearance arc-theme papirus-icon-theme network-manager \
+        unzip xdg-utils xdg-user-dirs lxpolkit gvfs-backends thunar thunar-volman \
         ffmpegthumbnailer ffmpeg mpv mousepad redshift flameshot xclip libnotify-bin obs-studio
-)
+}
 
-echo "Installing packages..."
-sleep 1
+outside_deb() {
+    curl -sS https://debian.griffo.io/EA0F721D231FDD3A0A17B9AC7808B4DD62C41256.asc | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/debian.griffo.io.gpg && echo "deb https://debian.griffo.io/apt $(lsb_release -sc 2>/dev/null) main" | sudo tee /etc/apt/sources.list.d/debian.griffo.io.list
 
-sudo apt-get install -y "${packages[@]}"
-    
-echo "Installation Complete."
-sleep 2
-clear
+    sudo apt-get update $APT_FLAGS && sudo apt-get install $APT_FLAGS ghostty
 
-echo "Installing Ghostty..."
-sleep 2
+    sudo curl -fsSLo /usr/share/keyrings/brave-browser-nightly-archive-keyring.gpg https://brave-browser-apt-nightly.s3.brave.com/brave-browser-nightly-archive-keyring.gpg && sudo curl -fsSLo /etc/apt/sources.list.d/brave-browser-nightly.sources https://brave-browser-apt-nightly.s3.brave.com/brave-browser.sources
 
-curl -sS https://debian.griffo.io/EA0F721D231FDD3A0A17B9AC7808B4DD62C41256.asc | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/debian.griffo.io.gpg && echo "deb https://debian.griffo.io/apt $(lsb_release -sc 2>/dev/null) main" | sudo tee /etc/apt/sources.list.d/debian.griffo.io.list
+    sudo apt-get update $APT_FLAGS && sudo apt-get install $APT_FLAGS brave-origin-nightly
+}
 
-sudo apt-get update && sudo apt-get install ghostty -y
-echo "Ghostty installed."
-sleep 1
-clear
+git_repos() {
+    git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt --depth=1
 
-sudo apt purge nano -y 2>/dev/null || echo "Nano is already removed, or was manually removed. Continuing..."
-
-font_dir="$HOME/.local/share/fonts"
-mkdir -p "$font_dir"
-
-nf_urls="/tmp/fonts.txt"
-cat > "$nf_urls" << 'EOF'
-https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/MartianMono.zip
-https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/JetBrainsMono.zip
-https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/IosevkaTerm.zip
-https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/GeistMono.zip
-https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/CascadiaCode.zip
-EOF
-
-cd "$font_dir"
-echo "Downloading Nerd Fonts...(this might take a while)"
-sleep 2
-wget --show-progress -i "$nf_urls" 
-
-echo "Download complete. Extracting fonts..."
-sleep 2
-
-for zip in ./*.zip; do
-    [ -f "$zip" ] && unzip -o "$zip"
-done
-
-echo "Extraction complete. Refreshing font cache, cleanup..." 
-sleep 2
-
-fc-cache -fv && rm -f ./*.zip
-rm -f "$nf_urls"
-echo "Nerd Fonts have been installed."
-
-cd "$HOME"
-sleep 2
-clear 
-
-echo "Installing Brave Origin..."
-
-sudo curl -fsSLo /usr/share/keyrings/brave-browser-nightly-archive-keyring.gpg https://brave-browser-apt-nightly.s3.brave.com/brave-browser-nightly-archive-keyring.gpg && sudo curl -fsSLo /etc/apt/sources.list.d/brave-browser-nightly.sources https://brave-browser-apt-nightly.s3.brave.com/brave-browser.sources
-
-sudo apt-get update
-
-sudo apt-get install brave-origin-nightly -y
-
-clear
-
-echo "Adding bash-git-prompt..."
-sleep 1
-git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt --depth=1
-
-tee -a "$HOME/.bashrc" << 'EOF'
+    tee -a "$HOME/.bashrc" << 'EOF'
 
 if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
     GIT_PROMPT_ONLY_IN_REPO=1
@@ -151,54 +121,73 @@ if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
 fi
 EOF
 
-sleep 1
-echo "Cloning homeguard..."
-git clone "https://github.com/jgz365/homeguard.git" "$HOME/homeguard"
+    tee -a "$HOME/.bashrc" << 'EOF'
 
-mkdir -p "$HOME/.config/i3/"
-mkdir -p "$HOME/.config/i3status/"
-mkdir -p "$HOME/.config/ghostty/"
-mkdir -p "$HOME/.config/fastfetch/"
-mkdir -p "$HOME/.config/dunst/"
-mkdir -p "$HOME/.config/picom/"
+cd () {
+    builtin cd "$@" && ls --color=auto -A
+}
 
-cp -r "$HOME/homeguard/i3/" "$HOME/.config/"
-cp -r "$HOME/homeguard/i3status/" "$HOME/.config/"
-cp -r "$HOME/homeguard/ghostty/" "$HOME/.config/"
-cp -r "$HOME/homeguard/fastfetch/" "$HOME/.config/"
-cp -r "$HOME/homeguard/dunst/" "$HOME/.config/"
-cp -r "$HOME/homeguard/picom/" "$HOME/.config/"
+_debian_age() {
+    local born=""
 
-cp "$HOME/homeguard/.vimrc" "$HOME"
+    if [ -e /lost+found ]; then
+        born=$(stat -c %Y /lost+found 2>/dev/null)
+    elif [ -f /var/log/installer/syslog ]; then
+        born=$(stat -c %Y /var/log/installer/syslog 2>/dev/null)
+    fi
 
-rm -rf "$HOME/homeguard"
+    if [ -n "$born" ]; then
+        local now=$(date +%s)
+        local seconds=$((now - born))
+        local days=$((seconds / 86400))
 
-echo "Dotfiles are set."
-sleep 1
-clear
+        if [ "$days" -lt 7 ]; then
+            local hours=$(((seconds % 86400) / 3600))
+            local minutes=$(((seconds % 3600) / 60))
+            echo "${days}d ${hours}h ${minutes}m"
+        else
+            echo "${days}d"
+        fi
+    else
+        echo "unknown"
+    fi
+}
 
-echo "Performing system services..."
-sleep 2
+main_prompt() {
+    local exit_code=$?
 
-xdg-user-dirs-update
-echo "exec dbus-run-session i3" >> "$HOME/.xinitrc"
-systemctl --user enable pulseaudio.service
+    local ok='\[\e[32m\]:)\[\e[m\]'
+    local err='\[\e[31m\]:(\[\e[m\]'
+    local smiley; [[ $exit_code -eq 0 ]] && smiley=$ok || smiley=$err
 
-if grep -qv '^#' /etc/network/interfaces; then
+    PS1="[sys: \$(_debian_age)] ${smiley} \w\n> "
+}
+
+PROMPT_COMMAND=main_prompt
+EOF
+
+    git clone https://github.com/jgz365/homeguard.git "$HOME/homeguard"
+    mkdir -p "$HOME/.config/{i3,i3status,ghostty,fastfetch,dunst,picom}"
+    cp -r "$HOME/homeguard/.config/"* "$HOME/.config/"
+    cp "$HOME/homeguard/.vimrc" "$HOME/"
+    rm -rf "$HOME/homeguard"
+}
+
+sys_srv() {
+    xdg-user-dirs-update
+    echo "exec dbus-run-session i3" >> "$HOME/.xinitrc"
+    systemctl --user enable pulseaudio.service
     sudo sed -i '/^[^#]/s/^/#/' /etc/network/interfaces
-fi
+    sudo sed -i 's/managed=false/managed=true/' /etc/NetworkManager/NetworkManager.conf
+}
 
-sudo sed -i 's/^managed=false/managed=true/' /etc/NetworkManager/NetworkManager.conf
+as_root
+configure_repos
+sudo apt-get upgrade $APT_FLAGS
+[ "$INSTALL_NVIDIA" = true ] && nvidia
+main_pkgs
+outside_deb
+git_repos
+sys_srv
 
-clear
-echo "Don't forget to connect to the internet with 'nmtui'"
-sleep 3
-
-echo "Installation Complete. System will reboot in:"
-
-for i in {5..1}; do
-    echo "$i..."
-    sleep 1
-done
-
-systemctl reboot
+echo "Done."
