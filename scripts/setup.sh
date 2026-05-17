@@ -110,6 +110,31 @@ outside_deb() {
     sudo apt-get update $APT_FLAGS && sudo apt-get install $APT_FLAGS brave-origin-nightly
 }
 
+font_pack() {
+    font_dir="$HOME/.local/share/fonts"
+    mkdir -p "$font_dir"
+
+nf_urls="/tmp/fonts.txt"
+cat > "$nf_urls" << 'EOF'
+https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/MartianMono.zip
+https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/JetBrainsMono.zip
+https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/IosevkaTerm.zip
+https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/GeistMono.zip
+https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/CascadiaCode.zip
+EOF
+
+cd "$font_dir"
+wget -q -i "$nf_urls"
+
+for zip in ./*.zip; do
+    [ -f "$zip" ] && unzip -q -o "$zip"
+done
+
+fc-cache -q && rm -f ./*.zip
+rm -f "$nf_urls"
+cd "$HOME"
+}
+
 git_repos() {
     git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt --depth=1
 
@@ -187,6 +212,7 @@ sudo apt-get upgrade $APT_FLAGS
 [ "$INSTALL_NVIDIA" = true ] && nvidia
 main_pkgs
 outside_deb
+font_pack
 git_repos
 sys_srv
 
