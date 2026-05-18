@@ -10,14 +10,14 @@ usage() {
 Usage: ${0##*/} [options]
 
 Options:
-  --no-nvidia             Skip NVIDIA driver installation (only if your driver doesn't support NVIDIA >= 550)
+  --no-nvidia             Skip NVIDIA driver installation
   --verbose               Show detailed output during installation
   -h, --help              Show this help message
 
 Examples:
   ${0##*/}                          # Default
   ${0##*/} --no-nvidia              # Skip NVIDIA installation
-  ${0##*/} --verbose                # Show output 
+  ${0##*/} --verbose                # Show output
   ${0##*/} --no-nvidia --verbose    # Skip NVIDIA, show output
 EOF
 }
@@ -60,7 +60,7 @@ nvidia() {
         echo "Skipping NVIDIA installation"
         return
     fi
-    
+
     sudo apt-get install $APT_FLAGS linux-headers-amd64 build-essential nvidia-detect
     nvidia-detect
     sudo apt-get install $APT_FLAGS nvidia-driver
@@ -91,13 +91,14 @@ configure_repos() {
 main_pkgs() {
     sudo apt-get install $APT_FLAGS --no-install-recommends \
         gcc curl git vim tmux \
-        fonts-noto fonts-noto-cjk fonts-noto-cjk-extra fonts-noto-color-emoji \
+        ttf-mscorefonts-installer fonts-noto fonts-noto-cjk fonts-noto-cjk-extra fonts-noto-color-emoji \
         fonts-noto-core \
         i3 i3status i3lock j4-dmenu-desktop picom dunst feh brightnessctl \
         xorg xinit x11-xserver-utils pulseaudio pulseaudio-utils alsa-utils \
         pavucontrol lxappearance arc-theme papirus-icon-theme network-manager \
         unzip xdg-utils xdg-user-dirs lxpolkit gvfs-backends thunar thunar-volman \
-        ffmpegthumbnailer ffmpeg mpv mousepad redshift flameshot xclip libnotify-bin obs-studio
+        ffmpegthumbnailer ffmpeg mpv mousepad redshift flameshot xclip libnotify-bin obs-studio \
+        p7zip-full
 }
 
 outside_deb() {
@@ -111,11 +112,12 @@ outside_deb() {
 }
 
 font_pack() {
-    font_dir="$HOME/.local/share/fonts"
+    local font_dir="$HOME/.local/share/fonts"
+    local nf_urls="/tmp/fonts.txt"
+    
     mkdir -p "$font_dir"
 
-nf_urls="/tmp/fonts.txt"
-cat > "$nf_urls" << 'EOF'
+    cat > "$nf_urls" << 'EOF'
 https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/MartianMono.zip
 https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/JetBrainsMono.zip
 https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/IosevkaTerm.zip
@@ -123,16 +125,38 @@ https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/GeistMono.zip
 https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/CascadiaCode.zip
 EOF
 
-cd "$font_dir"
-wget -q -i "$nf_urls"
+    cd "$font_dir"
+    wget -q -i "$nf_urls"
 
-for zip in ./*.zip; do
-    [ -f "$zip" ] && unzip -q -o "$zip"
-done
+    for zip in ./*.zip; do
+        [ -f "$zip" ] && unzip -q -o "$zip"
+    done
 
-fc-cache -q && rm -f ./*.zip
-rm -f "$nf_urls"
-cd "$HOME"
+    fc-cache -q && rm -f ./*.zip
+    rm -f "$nf_urls"
+    cd "$HOME"
+}
+
+cursor_theme() {
+    local cursor_dir="$HOME/.icons"
+    mkdir -p "$cursor_dir/default"
+
+    cat > "$cursor_dir/default/index.theme" << 'EOF'
+[Icon Theme]
+Name=Default
+Comment=Default Cursor Theme
+Inherits=Geared
+EOF
+
+    cd "$cursor_dir"
+    wget -q -O geared.7z https://github.com/piraker-grinor/geared-cursor/releases/download/v1.1/Geared-1.1.7z
+
+    7z x -q geared.7z
+
+    mv cursors/ Geared/
+    rm -f geared.7z
+
+    cd "$HOME"
 }
 
 git_repos() {
@@ -192,7 +216,7 @@ PROMPT_COMMAND=main_prompt
 EOF
 
     git clone https://github.com/jgz365/homeguard.git "$HOME/homeguard"
-    mkdir -p "$HOME/.config/{i3,i3status,ghostty,fastfetch,dunst,picom}"
+    mkdir -p "$HOME/.config/{i3,i3status,ghostty,gtk-3.0,fastfetch,dunst,picom}"
     cp -r "$HOME/homeguard/.config/"* "$HOME/.config/"
     cp "$HOME/homeguard/.vimrc" "$HOME/"
     rm -rf "$HOME/homeguard"
@@ -213,6 +237,7 @@ sudo apt-get upgrade $APT_FLAGS
 main_pkgs
 outside_deb
 font_pack
+cursor_theme
 git_repos
 sys_srv
 
