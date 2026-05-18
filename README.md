@@ -8,29 +8,6 @@ A set of configurations for linux-related stuff. Consists of scripts, [dotfiles]
 
 The only currently existing script that I have at the moment is for setting up i3wm with my own dotfiles. Install packages, imports my i3 config, so on and so forth.
 
-> [!WARNING]
-> Never paste a script without "you" knowing what it does. It's important to check a script before trying on executing it on your system. I am not responsible for any possible system breakages that can occur. This is a personal and more of a hobby setup. Always proceed with caution.
-
-```
-bash <(wget -qO- https://raw.githubusercontent.com/jgz365/homeguard/main/scripts/setup.sh)
-```
-```
-Usage: setup.sh [options]
-
-e.g bash <(wget -qO- https://raw.githubusercontent.com/jgz365/homeguard/main/scripts/setup.sh) --verbose
-
-Options:
-  --no-nvidia             Skip NVIDIA driver installation (only if your driver doesn't support NVIDIA >= 550)
-  --verbose               Show detailed output during installation
-  -h, --help              Show this help message
-
-Examples:
-  setup.sh                          # Default
-  setup.sh --no-nvidia              # Skip NVIDIA installation
-  setup.sh --verbose                # Show output
-  setup.sh --no-nvidia --verbose    # Skip NVIDIA, show output
-```
-
 Checklist:
 
 Complete: 
@@ -50,14 +27,13 @@ Script:
 - [x] Import my configuration file for dunst
 - [x] Import my picom config
 - [x] Add my custom bash prompt that detects system age
-- [x] Script re-write - much better
-- [x] Better package cleaup (remove package Y pulled by package X) - solved with `--no-install-recommends`
 
 Incomplete/In Progress:
 
 - [ ] Import settings.ini for automatic GTK Theming
 - [ ] Simple LSP + Syntax Highlighting for Vim, primarily for C Language
-- [ ] Test the script
+- [ ] Fix the script
+- [ ] Better package cleaup (remove package Y pulled by package X)
 
 Scrapped:
 
