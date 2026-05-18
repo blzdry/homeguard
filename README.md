@@ -1,14 +1,44 @@
-# homeguard
+## My personal set of configurations for linux-related stuff. Consists of scripts, [dotfiles](https://wiki.archlinux.org/title/Dotfiles), and many more to come. 
 
 ![description](assets/demo.png)
-
-A set of configurations for linux-related stuff. Consists of scripts, [dotfiles](https://wiki.archlinux.org/title/Dotfiles), and many more to come.
 
 > The "unmaintained" folder is my archived folder, it hasn't been used for a while so they may or may not work. They are not included in the script.
 
 The only currently existing script that I have at the moment is for setting up i3wm with my own dotfiles. Install packages, imports my i3 config, so on and so forth.
 
-Checklist:
+### Pre-requisite:
+- contrib
+- non-free
+- non-free-firmware (probably added already on installation)
+
+### The script will fail if you don't add these repositories, since I have included packages that only exists within these repos. (+ NVIDIA too)
+
+> [!NOTE]
+> This is mostly a personal script, but also handled with care just in case someone uses it. This script is not yet stable, and can still cause errors.
+
+To use:
+```
+bash <(wget -qO- https://raw.githubusercontent.com/jgz365/homeguard/main/scripts/setup.sh)
+```
+### Flag options:
+```
+Usage: setup.sh [options]
+
+Options:
+  --no-nvidia             Skip NVIDIA driver installation
+  --silent                Suppress every messages, little to no text output
+  -h, --help              Show this help message
+
+Examples:
+  setup.sh                          # Default
+  setup.sh --no-nvidia              # Skip NVIDIA installation
+  setup.sh --silent                 # Suppress messages
+  setup.sh --no-nvidia --silent     # Skip NVIDIA, suppress messages
+
+Sample:
+bash <(wget -qO- https://raw.githubusercontent.com/jgz365/homeguard/main/scripts/setup.sh) --no-nvidia
+```
+## Checklist:
 
 Complete: 
 
@@ -27,12 +57,12 @@ Script:
 - [x] Import my configuration file for dunst
 - [x] Import my picom config
 - [x] Add my custom bash prompt that detects system age
-
+- [x] Fix the script 
+- [x] Import settings.ini for automatic GTK Theming
+      
 Incomplete/In Progress:
 
-- [ ] Import settings.ini for automatic GTK Theming
 - [ ] Simple LSP + Syntax Highlighting for Vim, primarily for C Language
-- [ ] Fix the script
 - [ ] Better package cleaup (remove package Y pulled by package X)
 
 Scrapped:
