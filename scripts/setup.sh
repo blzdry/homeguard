@@ -1,9 +1,12 @@
+
 #!/bin/bash
 set -euo pipefail
 
 INSTALL_NVIDIA=true
-VERBOSE=false
-APT_FLAGS="-yqq"
+VERBOSE=true
+APT_FLAGS="-y"                          
+
+log() { [[ "$VERBOSE" == true ]] && echo "$@" || true; }
 
 usage() {
     cat <<EOF
@@ -11,15 +14,16 @@ Usage: ${0##*/} [options]
 
 Options:
   --no-nvidia             Skip NVIDIA driver installation
-  --verbose               Show detailed output during installation
+  --silent                Suppress every messages, little to no text output
   -h, --help              Show this help message
 
 Examples:
   ${0##*/}                          # Default
   ${0##*/} --no-nvidia              # Skip NVIDIA installation
-  ${0##*/} --verbose                # Show output
-  ${0##*/} --no-nvidia --verbose    # Skip NVIDIA, show output
+  ${0##*/} --silent                 # Suppress messages
+  ${0##*/} --no-nvidia --silent     # Skip NVIDIA, suppress messages
 EOF
+
 }
 
 while [[ $# -gt 0 ]]; do
@@ -28,9 +32,9 @@ while [[ $# -gt 0 ]]; do
             INSTALL_NVIDIA=false
             shift
             ;;
-        --verbose)
-            VERBOSE=true
-            APT_FLAGS="-y"
+        --silent)
+            VERBOSE=false
+            APT_FLAGS="-yqq"
             shift
             ;;
         -h | --help)
@@ -48,6 +52,22 @@ done
 APT_SOURCES_FILE="/etc/apt/sources.list"
 ADDITIONAL_REPOS=("contrib" "non-free" "non-free-firmware")
 
+configure_repos() {
+    for repo in "${ADDITIONAL_REPOS[@]}"; do
+    #            Fix: was "${APT_SOURCES_FILE[@]}" — wrong variable, also missing closing "
+        if grep -qE "(^| )${repo}( |$)" "$APT_SOURCES_FILE"; then
+        #                                              Fix: was undefined $loc
+            log "[SKIPPED] '$repo' was already added."
+        else
+            sudo sed -i "/^deb/s/$/ $repo/" "$APT_SOURCES_FILE"
+            #           Fix: was /^deb/s/$ $ADDITIONAL_REPOS — wrong sed syntax
+            log "[COMPLETE] '$repo' has been added."
+        fi
+    done
+
+    sudo apt-get update
+}
+
 as_root() {
     if [[ $EUID -eq 0 ]]; then
         echo "Do not run as root!" >&2
@@ -57,35 +77,13 @@ as_root() {
 
 nvidia() {
     if [ "$INSTALL_NVIDIA" = false ]; then
-        echo "Skipping NVIDIA installation"
+        log "Skipping NVIDIA installation"
         return
     fi
 
-    sudo apt-get install $APT_FLAGS linux-headers-amd64 build-essential nvidia-detect
+    sudo apt-get install -y linux-headers-amd64 build-essential nvidia-detect
     nvidia-detect
-    sudo apt-get install $APT_FLAGS nvidia-driver
-}
-
-configure_repos() {
-    sudo cp "$APT_SOURCES_FILE" "$APT_SOURCES_FILE.backup"
-
-    for repo in "${ADDITIONAL_REPOS[@]}"; do
-        if ! sudo grep -q "^deb.*$repo" "$APT_SOURCES_FILE"; then
-            sudo sed -i "/^deb /s/main[[:space:]]*$/main $repo/" "$APT_SOURCES_FILE"
-            echo "Added $repo"
-        else
-            echo "$repo already present"
-        fi
-
-        if ! sudo grep -q "^deb-src[[:space:]]\+.*$repo" "$APT_SOURCES_FILE"; then
-            sudo sed -i "/^deb-src[[:space:]]\+/s/main[[:space:]]*$/main $repo/" "$APT_SOURCES_FILE"
-            echo "Added $repo"
-        else
-            echo "$repo already present"
-        fi
-    done
-
-    sudo apt-get update $APT_FLAGS
+    sudo apt-get install -y nvidia-driver
 }
 
 main_pkgs() {
@@ -114,7 +112,7 @@ outside_deb() {
 font_pack() {
     local font_dir="$HOME/.local/share/fonts"
     local nf_urls="/tmp/fonts.txt"
-    
+
     mkdir -p "$font_dir"
 
     cat > "$nf_urls" << 'EOF'
@@ -132,7 +130,7 @@ EOF
         [ -f "$zip" ] && unzip -q -o "$zip"
     done
 
-    fc-cache -q && rm -f ./*.zip
+    fc-cache -f && rm -f ./*.zip
     rm -f "$nf_urls"
     cd "$HOME"
 }
@@ -151,7 +149,7 @@ EOF
     cd "$cursor_dir"
     wget -q -O geared.7z https://github.com/piraker-grinor/geared-cursor/releases/download/v1.1/Geared-1.1.7z
 
-    7z x -q geared.7z
+    7z x geared.7z
 
     mv cursors/ Geared/
     rm -f geared.7z
@@ -232,7 +230,6 @@ sys_srv() {
 
 as_root
 configure_repos
-sudo apt-get upgrade $APT_FLAGS
 [ "$INSTALL_NVIDIA" = true ] && nvidia
 main_pkgs
 outside_deb
@@ -241,4 +238,4 @@ cursor_theme
 git_repos
 sys_srv
 
-echo "Done."
+log "Done."
