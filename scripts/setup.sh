@@ -194,8 +194,8 @@ PROMPT_COMMAND=main_prompt
 EOF
 
     git clone https://github.com/jgz365/homeguard.git "$HOME/homeguard"
-    mkdir -p "$HOME/.config/{i3,i3status,ghostty,gtk-3.0,fastfetch,dunst,picom}"
-    cp -r "$HOME/homeguard/.config/"* "$HOME/.config/"
+    mkdir -p "$HOME"/.config/{i3,i3status,ghostty,gtk-3.0,fastfetch,dunst,picom}
+    cp -r "$HOME/homeguard/"* "$HOME/.config/"
     cp "$HOME/homeguard/.vimrc" "$HOME/"
     rm -rf "$HOME/homeguard"
 }
