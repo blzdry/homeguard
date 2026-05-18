@@ -1,4 +1,3 @@
-
 #!/bin/bash
 set -euo pipefail
 
@@ -49,25 +48,6 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-APT_SOURCES_FILE="/etc/apt/sources.list"
-ADDITIONAL_REPOS=("contrib" "non-free" "non-free-firmware")
-
-configure_repos() {
-    for repo in "${ADDITIONAL_REPOS[@]}"; do
-    #            Fix: was "${APT_SOURCES_FILE[@]}" — wrong variable, also missing closing "
-        if grep -qE "(^| )${repo}( |$)" "$APT_SOURCES_FILE"; then
-        #                                              Fix: was undefined $loc
-            log "[SKIPPED] '$repo' was already added."
-        else
-            sudo sed -i "/^deb/s/$/ $repo/" "$APT_SOURCES_FILE"
-            #           Fix: was /^deb/s/$ $ADDITIONAL_REPOS — wrong sed syntax
-            log "[COMPLETE] '$repo' has been added."
-        fi
-    done
-
-    sudo apt-get update
-}
-
 as_root() {
     if [[ $EUID -eq 0 ]]; then
         echo "Do not run as root!" >&2
@@ -96,7 +76,7 @@ main_pkgs() {
         pavucontrol lxappearance arc-theme papirus-icon-theme network-manager \
         unzip xdg-utils xdg-user-dirs lxpolkit gvfs-backends thunar thunar-volman \
         ffmpegthumbnailer ffmpeg mpv mousepad redshift flameshot xclip libnotify-bin obs-studio \
-        p7zip-full
+        7zip
 }
 
 outside_deb() {
@@ -229,7 +209,6 @@ sys_srv() {
 }
 
 as_root
-configure_repos
 [ "$INSTALL_NVIDIA" = true ] && nvidia
 main_pkgs
 outside_deb
