@@ -68,15 +68,13 @@ nvidia() {
 
 main_pkgs() {
     sudo apt-get install $APT_FLAGS --no-install-recommends \
-        gcc curl git vim tmux \
-        ttf-mscorefonts-installer fonts-noto fonts-noto-cjk fonts-noto-cjk-extra fonts-noto-color-emoji \
-        fonts-noto-core \
+        gcc curl git vim tmux fontconfig \
+        ttf-mscorefonts-installer fonts-noto fonts-noto-cjk fonts-noto-cjk-extra fonts-noto-color-emoji fonts-noto-core \
         i3 i3status i3lock j4-dmenu-desktop picom dunst feh brightnessctl \
         xorg xinit x11-xserver-utils pulseaudio pulseaudio-utils alsa-utils \
         pavucontrol lxappearance arc-theme papirus-icon-theme network-manager \
         unzip xdg-utils xdg-user-dirs lxpolkit gvfs-backends thunar thunar-volman \
-        ffmpegthumbnailer ffmpeg mpv mousepad redshift flameshot xclip libnotify-bin obs-studio \
-        7zip
+        ffmpegthumbnailer ffmpeg mpv mousepad redshift flameshot xclip libnotify-bin obs-studio 7zip
 }
 
 outside_deb() {
@@ -98,9 +96,7 @@ font_pack() {
     cat > "$nf_urls" << 'EOF'
 https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/MartianMono.zip
 https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/JetBrainsMono.zip
-https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/IosevkaTerm.zip
 https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/GeistMono.zip
-https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/CascadiaCode.zip
 EOF
 
     cd "$font_dir"
@@ -110,7 +106,8 @@ EOF
         [ -f "$zip" ] && unzip -q -o "$zip"
     done
 
-    fc-cache -f && rm -f ./*.zip
+    fc-cache -f 
+    rm -f ./*.zip
     rm -f "$nf_urls"
     cd "$HOME"
 }
@@ -187,12 +184,13 @@ main_prompt() {
     local err='\[\e[31m\]:(\[\e[m\]'
     local smiley; [[ $exit_code -eq 0 ]] && smiley=$ok || smiley=$err
 
-    PS1="[sys: \$(_debian_age)] ${smiley} \w\n> "
+    PS1="[recording: \$(_debian_age)] ${smiley} \w\n> "
 }
 
 PROMPT_COMMAND=main_prompt
 EOF
 
+    source "$HOME"/.bashrc
     git clone https://github.com/jgz365/homeguard.git "$HOME/homeguard"
     mkdir -p "$HOME"/.config/{i3,i3status,ghostty,gtk-3.0,fastfetch,dunst,picom}
     cp -r "$HOME/homeguard/"* "$HOME/.config/"
