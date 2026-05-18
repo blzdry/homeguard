@@ -4,7 +4,7 @@
 
 > The "unmaintained" folder is my archived folder, it hasn't been used for a while so they may or may not work. They are not included in the script.
 
-The only currently existing script that I have at the moment is for setting up i3wm with my own dotfiles. Install packages, imports my i3 config, so on and so forth.
+At the moment, all I have is a script for setting up i3wm with my own configuration.
 
 ### Pre-requisite:
 - contrib
@@ -14,7 +14,7 @@ The only currently existing script that I have at the moment is for setting up i
 ### The script will fail if you don't add these repositories, since I have included packages that only exists within these repos. (+ NVIDIA too)
 
 > [!NOTE]
-> This is mostly a personal script, but also handled with care just in case someone uses it. This script is not yet stable, and can still cause errors.
+> Although this script is mostly personal, it should be handled with care in case someone uses it.
 
 To use:
 ```
