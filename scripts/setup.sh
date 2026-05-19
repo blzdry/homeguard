@@ -13,7 +13,7 @@ Usage: ${0##*/} [options]
 
 Options:
   --no-nvidia             Skip NVIDIA driver installation
-  --silent                Suppress every messages, little to no text output
+  --silent                Suppress messages, little to no text output
   -h, --help              Show this help message
 
 Examples:
@@ -67,14 +67,25 @@ nvidia() {
 }
 
 main_pkgs() {
-    sudo apt-get install $APT_FLAGS --no-install-recommends \
-        gcc curl git vim tmux fontconfig \
-        ttf-mscorefonts-installer fonts-noto fonts-noto-cjk fonts-noto-cjk-extra fonts-noto-color-emoji fonts-noto-core \
-        i3 i3status i3lock j4-dmenu-desktop picom dunst feh brightnessctl \
-        xorg xinit x11-xserver-utils pulseaudio pulseaudio-utils alsa-utils \
-        pavucontrol lxappearance arc-theme papirus-icon-theme network-manager \
-        unzip xdg-utils xdg-user-dirs lxpolkit gvfs-backends thunar thunar-volman \
-        ffmpegthumbnailer ffmpeg mpv mousepad redshift flameshot xclip libnotify-bin obs-studio 7zip
+    sudo apt-get install $APT_FLAGS --no-install-recommends
+    obs-studio \
+    gvfs-backends \
+    thunar thunar-volman \
+    pulseaudio pulseaudio-utils \
+    network-manager \
+    redshift \
+    ffmpeg \
+    mpv xfce4-terminal
+
+    sudo apt-get install $APT_FLAGS
+    gcc curl git vim tmux fontconfig \
+    ttf-mscorefonts-installer fonts-noto fonts-noto-cjk fonts-noto-cjk-extra \
+    fonts-noto-color-emoji fonts-noto-core \
+    i3 i3status i3lock j4-dmenu-desktop picom dunst feh brightnessctl \
+    xinit x11-xserver-utils alsa-utils pavucontrol lxappearance \
+    arc-theme papirus-icon-theme unzip xdg-utils xdg-user-dirs \
+    lxpolkit ffmpegthumbnailer mousepad flameshot xclip \
+    libnotify-bin 7zip
 }
 
 outside_deb() {
@@ -188,7 +199,7 @@ EOF
 
     source "$HOME"/.bashrc
     git clone https://github.com/jgz365/homeguard.git "$HOME/homeguard"
-    mkdir -p "$HOME"/.config/{i3,i3status,gtk-3.0,fastfetch,dunst,picom}
+    mkdir -p "$HOME"/.config/{i3,i3status,gtk-3.0,fastfetch,dunst,picom,xfce4}
     cp -r "$HOME/homeguard/"* "$HOME/.config/"
     cp "$HOME/homeguard/.vimrc" "$HOME/"
     rm -rf "$HOME/homeguard"
