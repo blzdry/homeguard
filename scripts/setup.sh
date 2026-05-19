@@ -78,10 +78,6 @@ main_pkgs() {
 }
 
 outside_deb() {
-    curl -sS https://debian.griffo.io/EA0F721D231FDD3A0A17B9AC7808B4DD62C41256.asc | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/debian.griffo.io.gpg && echo "deb https://debian.griffo.io/apt $(lsb_release -sc 2>/dev/null) main" | sudo tee /etc/apt/sources.list.d/debian.griffo.io.list
-
-    sudo apt-get update $APT_FLAGS && sudo apt-get install $APT_FLAGS ghostty
-
     sudo curl -fsSLo /usr/share/keyrings/brave-browser-nightly-archive-keyring.gpg https://brave-browser-apt-nightly.s3.brave.com/brave-browser-nightly-archive-keyring.gpg && sudo curl -fsSLo /etc/apt/sources.list.d/brave-browser-nightly.sources https://brave-browser-apt-nightly.s3.brave.com/brave-browser.sources
 
     sudo apt-get update $APT_FLAGS && sudo apt-get install $APT_FLAGS brave-origin-nightly
@@ -192,7 +188,7 @@ EOF
 
     source "$HOME"/.bashrc
     git clone https://github.com/jgz365/homeguard.git "$HOME/homeguard"
-    mkdir -p "$HOME"/.config/{i3,i3status,ghostty,gtk-3.0,fastfetch,dunst,picom}
+    mkdir -p "$HOME"/.config/{i3,i3status,gtk-3.0,fastfetch,dunst,picom}
     cp -r "$HOME/homeguard/"* "$HOME/.config/"
     cp "$HOME/homeguard/.vimrc" "$HOME/"
     rm -rf "$HOME/homeguard"
