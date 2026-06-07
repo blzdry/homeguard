@@ -11,33 +11,6 @@ At the moment, all I have is a script for setting up i3wm with my own configurat
 - non-free
 - non-free-firmware (probably added already on installation)
 
-### The script will fail if you don't add these repositories, since I have included packages that only exists within these repos. (+ NVIDIA too)
-
-> [!NOTE]
-> Although this script is mostly personal, it should be handled with care in case someone uses it.
-
-To use:
-```
-bash <(wget -qO- https://raw.githubusercontent.com/jgz365/homeguard/main/scripts/setup.sh)
-```
-### Flag options:
-```
-Usage: setup.sh [options]
-
-Options:
-  --no-nvidia             Skip NVIDIA driver installation
-  --silent                Suppress every messages, little to no text output
-  -h, --help              Show this help message
-
-Examples:
-  setup.sh                          # Default
-  setup.sh --no-nvidia              # Skip NVIDIA installation
-  setup.sh --silent                 # Suppress messages
-  setup.sh --no-nvidia --silent     # Skip NVIDIA, suppress messages
-
-Sample:
-bash <(wget -qO- https://raw.githubusercontent.com/jgz365/homeguard/main/scripts/setup.sh) --no-nvidia
-```
 ## Checklist:
 
 Complete: 
