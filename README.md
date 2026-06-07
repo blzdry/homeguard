@@ -4,7 +4,7 @@
 
 > The "unmaintained" folder is my archived folder, it hasn't been used for a while so they may or may not work. They are not included in the script.
 
-At the moment, all I have is a script for setting up i3wm with my own configuration.
+~~At the moment, all I have is a script for setting up i3wm with my own configuration.~~
 
 ### Pre-requisite:
 - contrib
@@ -18,38 +18,22 @@ Complete:
 - [x] Create the repository
 - [x] Add configuration files 
 - [x] Add some old configs from my private repos
-
-Script:
-
-- [x] Create an install script
-- [x] Include vim configuration 
-- [x] Include my dotfiles
-- [x] Add an option for NVIDIA Driver installation
-- [x] Add my configuration file for Ghostty
-- [x] Import a fastfetch preset from the wiki
-- [x] Import my configuration file for dunst
-- [x] Import my picom config
-- [x] Add my custom bash prompt that detects system age
-- [x] Fix the script 
-- [x] Import settings.ini for automatic GTK Theming
       
 Incomplete/In Progress:
 
 - [ ] Simple LSP + Syntax Highlighting for Vim, primarily for C Language
 - [ ] Better package cleaup (remove package Y pulled by package X)
 
-Scrapped:
-
-~~-Add an option to make NVIDIA as the primary gpu (for optimus laptops)~~ 
-
-~~Add a logfile(?)~~ unnecessary.
-
 # Using NVIDIA as the Primary GPU (only tested in i3wm)
+
+Assuming that the NVIDIA Driver is installed/supported, this can be done. 
+
+### If using nouveau, this will not work.
 
 There's a little workaround to do for this to work. <br>
 If by any chance you *want* to make this happen, [here's how](https://wiki.debian.org/NVIDIA%20Optimus#Using_NVIDIA_GPU_as_the_primary_GPU):
 
-The script already installs `x11-xserver-utils`
+~~The script already installs `x11-xserver-utils`~~
 
 1. Paste the following in `/etc/X11/xorg.conf`
 ```
@@ -142,7 +126,7 @@ options nvidia-drm modeset=1
 Reboot, then invoke `startx`. i3wm should launch.<br>
 If by any chance you have or use a login manager, follow the [wiki](https://wiki.debian.org/NVIDIA%20Optimus#Display_managers) for more instructions.
 
-> The reason I did *NOT add this onto my script, is because it can get too complex, and can be tedious to work with. I do not plan to make big configurations here anymore, as it is nothing but an install script. 
+~~The reason I did *NOT add this onto my script, is because it can get too complex, and can be tedious to work with. I do not plan to make big configurations here anymore, as it is nothing but an install script.~~
 
 Sources used:
 - [i3-starterpack](https://github.com/addy-dclxvi/i3-starterpack)
