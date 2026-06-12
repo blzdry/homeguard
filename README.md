@@ -1,30 +1,28 @@
-## My personal set of configurations for linux-related stuff. Consists of scripts, [dotfiles](https://wiki.archlinux.org/title/Dotfiles), and many more to come. 
+## My personal set of configurations for linux-related stuff.
 
-![description](assets/demo.png)
+![description](assets/mint_i3.png)
 
+### Programs that I use:
+
+- [Brave Origin](https://brave.com/origin/)
+  > Free on Linux
+- Cinnamon's Terminal
+- i3status with [window title](https://github.com/rholder/i3status-title-on-bar)
+- [Flameshot](https://flameshot.org/) - screenshot tool, flexible
+- [Iosevka](https://www.nerdfonts.com/font-downloads) - nerd font for terminal and i3status
+- [j4-dmenu-desktop](https://github.com/enkore/j4-dmenu-desktop) - better dmenu for app launcher
+- *B*ourne *A*gain *Sh*ell - with custom prompt
+  
 > The "unmaintained" folder is my archived folder, it hasn't been used for a while so they may or may not work. They are not included in the script.
 
-~~At the moment, all I have is a script for setting up i3wm with my own configuration.~~
+### I discarded my install script as it is cumbersome to try integrate more and more stuff, eventually leading to confusion and possibly endless bugs that I can never imagine. Maybe in time if there's a better use-case for it.
 
-### Pre-requisite:
-- contrib
-- non-free
-- non-free-firmware (probably added already on installation)
+## Originally, I used Debian, but I've switched to Mint. In fact, some tasks I used to perform are now fewer thanks to Mint's OOTB experience.
 
-## Checklist:
+> which is basically the NVIDIA drivers, graphics switching, themes, etc.
 
-Complete: 
-
-- [x] Create the repository
-- [x] Add configuration files 
-- [x] Add some old configs from my private repos
-      
-Incomplete/In Progress:
-
-- [ ] Simple LSP + Syntax Highlighting for Vim, primarily for C Language
-- [ ] Better package cleaup (remove package Y pulled by package X)
-
-# Using NVIDIA as the Primary GPU (only tested in i3wm)
+# Using NVIDIA as the Primary GPU (only if using Debian)
+> i3 still shows the prime-applet on the tray, and switching graphics still works regardless of what you use. (Cinnamon or i3wm)
 
 Assuming that the NVIDIA Driver is installed/supported, this can be done. 
 
@@ -33,9 +31,7 @@ Assuming that the NVIDIA Driver is installed/supported, this can be done.
 There's a little workaround to do for this to work. <br>
 If by any chance you *want* to make this happen, [here's how](https://wiki.debian.org/NVIDIA%20Optimus#Using_NVIDIA_GPU_as_the_primary_GPU):
 
-~~The script already installs `x11-xserver-utils`~~
-
-1. Paste the following in `/etc/X11/xorg.conf`
+1. Paste the following in `/etc/X11/xorg.conf` (make sure to install x11-xserver-utils)
 ```
 Section "ServerLayout"
     Identifier "layout"
@@ -125,8 +121,6 @@ options nvidia-drm modeset=1
 
 Reboot, then invoke `startx`. i3wm should launch.<br>
 If by any chance you have or use a login manager, follow the [wiki](https://wiki.debian.org/NVIDIA%20Optimus#Display_managers) for more instructions.
-
-~~The reason I did *NOT add this onto my script, is because it can get too complex, and can be tedious to work with. I do not plan to make big configurations here anymore, as it is nothing but an install script.~~
 
 Sources used:
 - [i3-starterpack](https://github.com/addy-dclxvi/i3-starterpack)
