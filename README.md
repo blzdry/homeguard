@@ -12,6 +12,8 @@
 - [Iosevka](https://www.nerdfonts.com/font-downloads) - nerd font for terminal and i3status
 - [j4-dmenu-desktop](https://github.com/enkore/j4-dmenu-desktop) - better dmenu for app launcher
 - *B*ourne *A*gain *Sh*ell - with custom prompt
+
+  This theme heavily uses the [Arc Theme](https://github.com/arc-design/arc-theme), same goes to the terminal theme.
   
 > The "unmaintained" folder is my archived folder, it hasn't been used for a while so they may or may not work. They are not included in the script.
 
@@ -133,4 +135,4 @@ Sources used:
 - [Bash Git Prompt](https://github.com/magicmonty/bash-git-prompt)
 - [Bash Syntax](https://www.w3schools.com/bash/bash_syntax.php)
 - [Fastfetch](https://github.com/fastfetch-cli/fastfetch)
-
+- [Arc-Theme](https://github.com/arc-design/arc-theme)
