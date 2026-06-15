@@ -15,6 +15,8 @@
 
   This theme heavily uses the [Arc Theme](https://github.com/arc-design/arc-theme), same goes to the terminal theme.
   
+### I have created two folders named "debian" and "gentoo" since I use these two distributions, (although I actually use Linux Mint, it's still a debian-derivative, or ubuntu really, but either way it's still like a family tree.) it's better to sort out the folders, since there will be a difference between the two.
+
 > The "unmaintained" folder is my archived folder, it hasn't been used for a while so they may or may not work. They are not included in the script.
 
 ### I discarded my install script as it is cumbersome to try integrate more and more stuff, eventually leading to confusion and possibly endless bugs that I can never imagine. Maybe in time if there's a better use-case for it.
