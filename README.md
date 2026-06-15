@@ -15,7 +15,7 @@
 
   This theme heavily uses the [Arc Theme](https://github.com/arc-design/arc-theme), same goes to the terminal theme.
   
-### I have created two folders named "debian" and "gentoo" since I use these two distributions, (although I actually use Linux Mint, it's still a debian-derivative, or ubuntu really, but either way it's still like a family tree.) it's better to sort out the folders, since there will be a difference between the two.
+### I have created two folders named "deborah" and "epoch" since I use these two distributions, (although I actually use Linux Mint, it's still a debian-derivative, or ubuntu really, but either way it's still like a family tree.) it's better to sort out the folders, since there will be a difference between the two.
 
 > The "unmaintained" folder is my archived folder, it hasn't been used for a while so they may or may not work. They are not included in the script.
 
