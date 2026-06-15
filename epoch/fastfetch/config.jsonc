@@ -1,0 +1,64 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+
+  "logo": {
+    "source": "none"
+  },
+
+  "display": {
+    "separator": " : "
+  },
+
+  "modules": [
+
+    { "type": "os",         "key": "OS         " },
+    { "type": "kernel",     "key": "Kernel     " },
+    { "type": "shell",      "key": "Shell      " },
+    { "type": "uptime",     "key": "Uptime     " },
+    { "type": "packages",   "key": "Packages   " },
+
+    "break",
+
+    { "type": "terminal",   "key": "Terminal   " },
+    { "type": "wm",         "key": "WM         " },
+    { "type": "display",    "key": "Resolution " },
+    { "type": "theme",      "key": "Theme      " },
+    { "type": "icons",      "key": "Icons      " },
+    { "type": "font",       "key": "Font       " },
+
+    "break",
+
+    { "type": "cpu",        "key": "CPU        " },
+    { "type": "cpuusage",   "key": "CPU Usage  " },
+    { "type": "gpu",        "key": "GPU        ", "hideType": "integrated", "format": "{name}" },
+
+    "break",
+
+    {
+      "type": "memory",
+      "key": "Memory     ",
+      "percentType": 1
+    },
+
+    {
+      "type": "swap",
+      "key": "Swap       ",
+      "percentType": 1
+    },
+
+    {
+      "type": "disk",
+      "key": "Disk       ",
+      "folders": "/",
+      "percentType": 1
+    },
+
+    "break",
+
+    {
+      "type": "command",
+      "key": "Next Tier  ",
+      "text": "bash ~/.config/fastfetch/system-age.sh next"
+    }
+  ]
+}
