@@ -1,29 +1,50 @@
 ## My personal set of configurations for linux-related stuff.
 
-![description](assets/mint_i3.png)
+<table border="0">
+  <tr>
+    <td align="center">
+      <img src="./assets/mint_i3.png" width="100%" alt="i3_mint"/><br/>
+      <b>Linux Mint with i3wm</b>
+    </td>
+    <td align="center">
+      <img src="./assets/gentoo_desktop.png" width="100%" alt="Image 2 description"/><br/>
+      <b>Gentoo Linux with i3wm</b>
+    </td>
+  </tr>
+</table>
 
-### Programs that I use:
+
+## Programs/tools/utilities that I use:
+
+### For both (as the setup is identical)
+
+- [Iosevka](https://github.com/be5invis/iosevka), [Geist](https://github.com/vercel/geist-font), [Martian](https://github.com/evilmartians/mono) - nerd fonts, mostly bold-tainted, better readability in my case
+- [superfile](https://github.com/yorukot/superfile)
+- i3status with [window title](https://github.com/rholder/i3status-title-on-bar)
+- [Flameshot](https://flameshot.org/) - screenshot tool, flexible
+- [j4-dmenu-desktop](https://github.com/enkore/j4-dmenu-desktop) - better dmenu for app launcher
+- *B*ourne *A*gain *Sh*ell - with custom prompt
+- [Gogh](https://gogh-co.github.io/Gogh/) - for terminal theme
+ 
+### For Linux Mint:
 
 - [Brave Origin](https://brave.com/origin/)
   > Free on Linux
 - Cinnamon's Terminal
-- i3status with [window title](https://github.com/rholder/i3status-title-on-bar)
-- [Flameshot](https://flameshot.org/) - screenshot tool, flexible
-- [Iosevka](https://www.nerdfonts.com/font-downloads) - nerd font for terminal and i3status
-- [j4-dmenu-desktop](https://github.com/enkore/j4-dmenu-desktop) - better dmenu for app launcher
-- *B*ourne *A*gain *Sh*ell - with custom prompt
 
-  This theme heavily uses the [Arc Theme](https://github.com/arc-design/arc-theme), same goes to the terminal theme.
+### For Gentoo Linux:
+
+- Firefox
+- XFCE Terminal
+- [xob](https://github.com/florentc/xob) - overlay bar for brightness/audio
   
-### I have created two folders named "deborah" and "epoch" since I use these two distributions, (although I actually use Linux Mint, it's still a debian-derivative, or ubuntu really, but either way it's still like a family tree.) it's better to sort out the folders, since there will be a difference between the two.
+  This theme heavily uses the [Arc Theme](https://github.com/arc-design/arc-theme), same goes to the terminal theme.
 
-> The "unmaintained" folder is my archived folder, it hasn't been used for a while so they may or may not work. They are not included in the script.
+> The "unmaintained" folder is my archived folder, it hasn't been used for a while so they may or may not work.
 
-### I discarded my install script as it is cumbersome to try integrate more and more stuff, eventually leading to confusion and possibly endless bugs that I can never imagine. Maybe in time if there's a better use-case for it.
+## Originally, I used Debian, but I've switched to Mint (hence the NVIDIA snippet at the bottom). In fact, some tasks I used to perform are now fewer thanks to Mint's OOTB experience.
 
-## Originally, I used Debian, but I've switched to Mint. In fact, some tasks I used to perform are now fewer thanks to Mint's OOTB experience.
-
-> which is basically the NVIDIA drivers, graphics switching, themes, etc.
+> which are the NVIDIA drivers, graphics switching, themes, etc.
 
 # Using NVIDIA as the Primary GPU (only if using Debian)
 > i3 still shows the prime-applet on the tray, and switching graphics still works regardless of what you use. (Cinnamon or i3wm)
