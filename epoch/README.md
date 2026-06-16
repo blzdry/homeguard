@@ -78,7 +78,6 @@ observer.join()
 
 `time.sleep` was adjusted onto a lower timeframe - so when the combination for brightness was invoked, (e.g fn + fX) `xob` appears the same time you hit the keybind.
 
-`flush=True`
 In i3/config - autostart section:
 
 `exec --no-startup-id ~/.local/bin/xob-brightness.py | xob -t 1500` sets `xob`'s timeout to 1500, so that the fade out of the bar isn't as abrupt as it might be.
