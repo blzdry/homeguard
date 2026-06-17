@@ -4,11 +4,11 @@
   <tr>
     <td align="center">
       <img src="./assets/mint_i3.png" width="100%" alt="i3_mint"/><br/>
-      <b>Linux Mint with i3wm</b>
+      <b>Linux Mint with i3wm on 1920x1080 </b>
     </td>
     <td align="center">
       <img src="./assets/gentoo_desktop.png" width="100%" alt="Image 2 description"/><br/>
-      <b>Gentoo Linux with i3wm</b>
+      <b>Gentoo Linux with i3wm on 1366x768 </b>
     </td>
   </tr>
 </table>
