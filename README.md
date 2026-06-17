@@ -15,30 +15,6 @@
 
 # I've listed some documentation or things that I have used on their respective folders. Check here for [epoch](./epoch) and [deborah](./deborah)
 
-## Programs/tools/utilities that I use:
-
-### For both (as the setup is identical)
-
-- [Iosevka](https://github.com/be5invis/iosevka), [Geist](https://github.com/vercel/geist-font), [Martian](https://github.com/evilmartians/mono) - nerd fonts, mostly bold-tainted, better readability in my case
-- [superfile](https://github.com/yorukot/superfile)
-- i3status with [window title](https://github.com/rholder/i3status-title-on-bar)
-- [Flameshot](https://flameshot.org/) - screenshot tool, flexible
-- [j4-dmenu-desktop](https://github.com/enkore/j4-dmenu-desktop) - better dmenu for app launcher
-- *B*ourne *A*gain *Sh*ell - with custom prompt
-- [Gogh](https://gogh-co.github.io/Gogh/) - for terminal theme
- 
-### For Linux Mint:
-
-- [Brave Origin](https://brave.com/origin/)
-  > Free on Linux
-- Cinnamon's Terminal
-
-### For Gentoo Linux:
-
-- Firefox
-- XFCE Terminal
-- [xob](https://github.com/florentc/xob) - overlay bar for brightness/audio
-  
   This theme heavily uses the [Arc Theme](https://github.com/arc-design/arc-theme), same goes to the terminal theme.
 
 > The "unmaintained" folder is my archived folder, it hasn't been used for a while so they may or may not work.
