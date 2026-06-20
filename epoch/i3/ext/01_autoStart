@@ -1,0 +1,9 @@
+# ┏┓┓┏╋┏┓┏╋┏┓┏┓╋
+# ┗┻┗┻┗┗┛┛┗┗┻┛ ┗
+
+exec --no-startup-id feh --bg-scale $HOME/.config/i3/gray.jpg
+exec --no-startup-id dex --autostart --environment i3
+exec_always --no-startup-id picom -b
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id ~/.local/bin/xob-brightness.py | xob -t 1500
+

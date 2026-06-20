@@ -1,0 +1,94 @@
+# For the "tier" to work, make sure to invoke
+# sudo head -n 1 /var/log/emerge.log | sudo tee /etc/gentoo-installdate
+# first. This will print out the first-ever emerge that happened onto the system.
+
+genstallDate () {
+ local file="/etc/gentoo-installdate"
+  [[ -f "$file" ]] && cut -d':' -f1 < "$file"
+}
+
+gentooSystemAge () {
+ local birth=$(genstallDate)
+
+ [[ -z "$birth" ]] && { printf 'unknown, maybe not a gentoo distro?'; return; }
+
+ local now second day hour minute
+
+ now=$(date +%s)
+ second=$((now - birth))
+ day=$((second / 86400))
+ hour=$(( (second % 86400) / 3600 ))
+ minute=$(( (second % 3600) / 60 ))
+
+ if (( day < 30 )); then
+ 	printf '%dd %dh %dm' "$day" "$hour" "$minute"
+ elif (( day < 365 )); then
+ 	printf '%dmo %dd' "$((day / 30))" "$((day % 30))"
+ else
+ 	printf '%dyr %dmo' "$((day / 365))" "$((day % 365 / 30))"
+ fi
+
+}
+
+tierList () {
+ local birth=$(genstallDate)
+
+ [[ -z "$birth" ]] && { printf 'Seedling'; return; }
+
+ local day=$(( ($(date +%s) - birth) / 86400 ))
+
+ if (( day >= 365 )); 
+ then printf 'Mythical'
+
+ elif (( day >= 270 ));
+ then printf 'Diamond'
+
+ elif (( day >= 180 ));
+ then printf 'Emerald'
+
+ elif (( day >= 90 ));
+ then printf 'Platinum'
+
+ elif (( day >= 60 ));
+ then printf 'Gold'
+
+ elif (( day >= 30 ));
+ then printf 'Silver'
+
+ elif (( day >= 21 ));
+ then printf 'Bronze'
+
+ elif (( day >= 14 ));
+ then printf 'Iron'
+
+ elif (( day >= 7 ));
+ then printf 'Copper'
+
+ else
+ printf 'Seedling'
+
+fi
+
+}
+
+mainPrompt () {
+ local exitCode=$?
+ local tierList=$(tierList)
+ local gentooSystemAge=$(gentooSystemAge)
+ local statusIndicator
+
+ if (( exitCode == 0 )); then
+  statusIndicator="OK"
+ else
+  statusIndicator="!!"
+ fi
+
+ PS1="[$tierList | Age: $gentooSystemAge] \w [$statusIndicator] \n\$ "
+}
+
+PROMPT_COMMAND=mainPrompt
+
+
+
+
+

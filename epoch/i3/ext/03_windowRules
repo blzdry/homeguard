@@ -1,0 +1,40 @@
+#     ┓
+# ┏┓┓┏┃┏┓┏
+# ┛ ┗┻┗┗ ┛
+
+for_window [all] title_format " "
+force_display_urgency_hint 2000 ms
+focus_on_window_activation urgent
+focus_follows_mouse no
+
+default_border pixel 3
+
+# Terminal
+assign [class="Xfce4-terminal"] 1
+assign [class="xfce4-terminal"] 1
+
+# Brave Browser
+for_window [class="brave-browser"] border none
+for_window [class="Brave-browser"] border none
+
+assign [class="brave-browser"] 2
+assign [class="Brave-browser"] 2
+
+# Discord
+assign [class="discord"] 2
+
+# File Manager
+assign [class="pcmanfm"] 3
+assign [class="Pcmanfm"] 3
+
+# Packet Tracer
+assign [class="PacketTracer"] 4
+
+# Blender
+assign [class="Blender"] 4
+
+# GTK Settings
+assign [class="lxappearance"] 4
+
+# Video Player
+assign [class="mpv"] 5

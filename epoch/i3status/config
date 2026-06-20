@@ -7,15 +7,16 @@ general {
 order += "volume master"
 order += "battery 0"
 order += "tztime local"
+order += "wireless wlp3s0f0"
 
 volume master {
-        format = "Audio: %volume"
-        format_muted = "Audio: muted (%volume)"
+        format = "Audio: %volume |"
+        format_muted = "Audio: muted (%volume) |"
         device = "pulse"
 }
 
 battery 0 {
-        format = "%status %percentage"
+        format = "%status %percentage |"
         status_chr = "Charging"
 	status_bat = "Battery"
         status_full = "Full"
@@ -25,5 +26,10 @@ battery 0 {
 }
 
 tztime local {
-    format = "%A, %B %d, %Y %I:%M %p "
+    format = "%A, %B %d %I:%M %p |"
 }   
+
+wireless wlp3s0f0 {
+        format_up = "[OK]"
+        format_down = "[ERR]"
+}

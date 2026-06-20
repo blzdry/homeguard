@@ -1,0 +1,2 @@
+virtual/printer -cups
+net-print/cups -X -acl -pam -dbus -usb

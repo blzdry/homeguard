@@ -1,0 +1,24 @@
+# •┏┓
+# ┓ ┫┏╋┏┓╋┓┏┏
+# ┗┗┛┛┗┗┻┗┗┻┛
+
+bar {
+        status_command i3status | i3status-title-on-bar --color '#02FFBF'  
+	position top
+	font pango: MartianMonoNerdFont Semi-Bold 8
+        colors {
+	    background 	#141c21
+	    statusline 	#FFFADA
+	    separator 	#141c21
+	    binding_mode #BF616A #BF616A #ECEFF4
+
+	    focused_workspace 	#141c21 #3d85c6 #fff2cc
+	    active_workspace 	#141c21 #141c21 #93a1a1
+	    inactive_workspace 	#141c21 #141c21 #93a1a1
+	    urgent_workspace 	#141c21 #b08500 #93a1a1
+	}
+}
+
+client.focused          #5E81AC #5E81AC #ECEFF4 #5E81AC #5E81AC
+client.focused_inactive #3B4252 #3B4252 #D8DEE9 #3B4252 #3B4252
+client.unfocused        #2E3440 #2E3440 #A0A7B0 #2E3440 #2E3440

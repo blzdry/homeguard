@@ -1,2 +1,2 @@
-media-video/pipewire -sound-server -pulse
+media-video/pipewire -sound-server -pulse -bluetooth
 media-libs/libpulse 
