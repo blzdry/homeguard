@@ -3,36 +3,74 @@
 
 > (incomplete, will update at some point)
 
-Here is a table list of the packages I installed to setup i3wm, sorted as the package name, is essential, and lastly if it's in [GURU](https://wiki.gentoo.org/wiki/Project:GURU).
+Here is a table list of the packages I installed to setup i3wm.
 
 ### In Gentoo repository:
 
-| Packages             | Essential?          |
+| Packages             | Do you need this?          |
 | ------------------   | ------------------- | 
-| x11-base/xorg-server | yes                 | 
-| x11-base/xorg-driver | yes                 | 
-| media-fonts/noto     | recommended         | 
-| media-fonts/fonts-meta | recommended       | 
-| media-fonts/noto-cjk | recommended         | 
-| media-fonts/corefonts | optional           |
-| x11-wm/i3            | totally             | 
-| x11-wm/i3lock        | optional            | 
-| x11-wm/i3status      | yes                 | 
-| sys-power/acpi       | if using laptop     | 
-| x11-terms/xfce4-terminal | can use other terminal |
-| dev-python/watchdog  | if using xob, yes   | 
-| media-sound/pulseaudio-daemon | yes        | 
-| media-sound/alsa-utils | yes               | 
-| media-sound/alsa-tools | depends           | 
+| app-admin/sudo | yes, can use doas for alternative |
+| app-editors/vim | yes |
+| app-eselect/eselect-repository | yes |
+| app-misc/fastfetch | no |
+| app-misc/jq | no |
+| app-office/onlyoffice-bin | depends |
+| app-portage/eix | yes |
+| app-portage/gentoolkit | yes |
+| app-shells/bash-completion | no |
+| app-text/tree | no |
+| dev-java/openjdk-bin:8 | no |
+| dev-vcs/git | yes |
+| lxde-base/lxappearance | yes |
+| mail-client/thunderbird-bin | depends |
+| media-fonts/fonts-meta | yes |
+| media-fonts/corefonts | depends |
+| media-fonts/noto | yes |
+| media-fonts/noto-cjk | depends |
+| media-fonts/noto-emoji | yes |
+| media-gfx/blender | no |
+| media-gfx/feh | yes |
+| media-gfx/flameshot | yes |
+| media-libs/libpulse | yes |
+| media-sound/alsa-tools | yes |
+| media-sound/alsa-utils | yes |
+| media-sound/pulseaudio-daemon | yes |
+| media-video/mpv | yes |
+| media-video/obs-studio | yes |
+| net-im/discord | no |
+| net-misc/networkmanager | yes, easy setup for wifi on laptops |
+| sys-apps/qingy | depends |
+| sys-apps/xdg-desktop-portal | yes |
+| sys-apps/xdg-desktop-portal-gtk | yes |
+| sys-power/acpi | if using laptop, yes |
+| sys-power/tlp | if using laptop, yes |
+| sys-process/btop | yes |
+| www-client/ungoogled-chromium | preference |
+| x11-apps/xinit | yes |
+| x11-misc/dunst | yes |
+| x11-misc/i3lock | depends |
+| x11-misc/i3status | yes |
+| x11-misc/j4-dmenu-desktop | yes, can also use rofi or dmenu |
+| x11-misc/pcmanfm | preference |
+| x11-misc/picom | yes |
+| x11-misc/screenkey | depends |
+| x11-misc/xclip | yes |
+| x11-misc/xdg-user-dirs | yes |
+| x11-misc/xdg-utils | yes |
+| x11-terms/xfce4-terminal | yes |
+| x11-themes/arc-icon-theme | yes |
+| x11-themes/arc-theme | yes |
+| x11-wm/i3 | totally |
 
 ### In GURU:
 
 | Packages                | Essential? |
 | ----------------------- | ---------- |
-| x11-misc/xob            | optional   |
+| app-misc/brightnessctl | if using laptop, yes        |
+| gui-apps/packettracer | no |
+| x11-misc/xob            | if using laptop, yes   |
 | sys-fs/duf              | no         |
-| sys-power/brightnessctl | yes        | 
-
+ 
 # Optional - Packet Tracer
 I would be about 99.5% sure that no one would even use this, in Gentoo. But apparently I do. Thanks to this [reddit thread](https://www.reddit.com/r/Gentoo/comments/1qk403f/how_to_get_packet_tracer_822_working_on_gentoo/).
 
