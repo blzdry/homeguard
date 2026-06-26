@@ -1,0 +1,195 @@
+# [swaywm]
+#--
+# v.1.10.1
+
+# [autostart]
+#--
+set  $XDG_CURRENT_DESKTOP sway
+exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec dbus-update-activation-environment --all
+exec gnome-keyring-daemon --start --components=secrets
+exec export $(gnome-keyring-daemon)
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+exec systemctl --user start xdg-desktop-portal-wlr
+exec foot -s
+
+# [global_settings]
+# --
+set $ultra Mod4
+set $left  h
+set $down  j
+set $up    k
+set $right l
+
+seat seat0 xcursor_theme Cartoonish-Bold 24
+output * bg $HOME/.config/sway/nord_purple_waves.png fill
+
+focus_follows_mouse no
+mouse_warping none
+floating_modifier $ultra normal
+gaps inner 4
+gaps outer 2
+default_border pixel 4
+
+input type:keyboard {
+    repeat_delay 200
+    repeat_rate  40
+    xkb_options  "caps:escape"
+}
+
+exec swayidle -w \
+    timeout 300  'gtklock' \
+    timeout 600  'swaymsg "output * dpms off"' \
+    resume       'swaymsg "output * dpms on"' \
+    before-sleep 'gtklock'
+
+client.focused            #a3be8c #a3be8c #a3be8c #a3be8c #a3be8c
+client.focused_inactive   #bf616a #bf616a #bf616a #bf616a #bf616a
+client.unfocused          #d08770 #d08770 #d08770 #d08770 #d08770
+
+# [application_variables]
+#--
+set $shell    foot
+set $web      brave-origin
+set $files    thunar
+set $app_menu tofi-drun | xargs swaymsg exec --
+
+# [window_rules]
+#--
+
+for_window [app_id="foot"] 		move to workspace "1:[SHELL]"
+for_window [app_id="brave-origin"] 	move to workspace "2:[WEB]"
+for_window [app_id="thunar"] 		move to workspace "3:[MEDIA]"
+for_window [app_id="discord"] 		move to workspace "4:[CHAT]"
+
+# [[browsers]]
+#--
+for_window [title="^Sign in.*Google.*$"] floating enable
+for_window [window_type="dialog"]        floating enable
+for_window [window_type="utility"]       floating enable
+for_window [window_role="dialog"]        floating enable
+for_window [window_role="pop-up"]        floating enable
+for_window [window_role="bubble"]        floating enable
+for_window [window_role="task_dialog"]   floating enable
+# [[file_thunar]]
+#--
+for_window [app_id="thunar" title="Copying*"]     floating enable
+for_window [app_id="thunar" title="Moving*"]      floating enable
+for_window [app_id="thunar" title="Deleting*"]    floating enable
+# [[general_properties]]
+#--
+for_window [app_id="flying-foot"]   floating enable
+for_window [title="Preferences$"]   floating enable
+for_window [title="Properties$"]    floating enable
+for_window [title="^About.*$"]      floating enable
+# [[steam]]
+#--
+for_window [class="^(steam$)" title="^(?!Steam$)"] floating enable
+
+# [program_keybinds]
+#--
+bindsym $ultra+q		kill
+bindsym $ultra+Shift+c		reload
+bindsym $ultra+f		fullscreen
+bindsym $ultra+Shift+space	floating toggle
+bindsym $ultra+space		focus mode_toggle
+bindsym $ultra+Shift+e		exec	~/.config/sway/powermenu.sh
+bindsym $ultra+Return 		exec	$shell
+bindsym $ultra+d      		exec	$app_menu
+bindsym $ultra+e      		exec	$files
+bindsym $ultra+w      		exec	$web
+bindsym $ultra+0		exec 	$shell -a 'flying-foot'	htop
+bindsym $ultra+Shift+0		exec	$shell -a 'flying-foot'
+
+bindsym Print 		exec grimshot save screen - | swappy -f -
+bindsym $ultra+Shift+s 	exec grimshot save area - | swappy -f -
+
+# [window_navigation]
+#--
+bindsym $ultra+h focus left
+bindsym $ultra+j focus down
+bindsym $ultra+k focus up
+bindsym $ultra+l focus right
+
+bindsym $ultra+Shift+h move left
+bindsym $ultra+Shift+j move down
+bindsym $ultra+Shift+k move up
+bindsym $ultra+Shift+l move right
+
+bindsym $ultra+Ctrl+l resize grow   width  20px
+bindsym $ultra+Ctrl+h resize shrink width  20px
+bindsym $ultra+Ctrl+k resize grow   height 20px
+bindsym $ultra+Ctrl+j resize shrink height 20px
+
+# [bar_workspaces]
+#--
+
+# [[workspace_legend]]
+#--
+# W1 : Shell
+# Terminal
+#
+# W2 : Web
+# Browsers
+#
+# W3 : Media
+# File Manager, OBS, Torrenting
+#
+# W4 : Chat
+# Discord, Messaging
+#
+# W5 : Android
+# Android Studio, Development
+#
+# W6 : Mailman
+# Thunderbird
+#
+# W7 : Dumpster
+# Miscellaneous Programs
+ 
+set $ws1 "1:[SHELL]"
+set $ws2 "2:[WEB]"
+set $ws3 "3:[MEDIA]"
+set $ws4 "4:[CHAT]"
+set $ws5 "5:[ANDROID]"
+set $ws6 "6:[MAILMAN]"
+set $ws7 "7:[DUMPSTER]"
+
+bindsym $ultra+1 workspace $ws1
+bindsym $ultra+2 workspace $ws2
+bindsym $ultra+3 workspace $ws3
+bindsym $ultra+4 workspace $ws4
+bindsym $ultra+5 workspace $ws5
+bindsym $ultra+6 workspace $ws6
+bindsym $ultra+7 workspace $ws7
+
+bindsym $ultra+Shift+1 move container to workspace $ws1
+bindsym $ultra+Shift+2 move container to workspace $ws2
+bindsym $ultra+Shift+3 move container to workspace $ws3
+bindsym $ultra+Shift+4 move container to workspace $ws4
+bindsym $ultra+Shift+5 move container to workspace $ws5
+bindsym $ultra+Shift+6 move container to workspace $ws6
+bindsym $ultra+Shift+7 move container to workspace $ws7
+
+# [scratchpad]
+#--
+bindsym $ultra+Shift+minus 	move scratchpad
+bindsym $ultra+minus 		scratchpad show
+
+# [audio_adjustment]
+#--
+bindsym --locked XF86AudioMute 		exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
+bindsym --locked XF86AudioLowerVolume 	exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
+bindsym --locked XF86AudioRaiseVolume 	exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
+bindsym --locked XF86AudioMicMute 	exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+
+# [brightness]
+#--
+bindsym --locked XF86MonBrightnessDown 	exec brightnessctl set 5%-
+bindsym --locked XF86MonBrightnessUp 	exec brightnessctl set 5%+
+
+# [waybar_set]
+#--
+bar {
+   swaybar_command waybar 
+}

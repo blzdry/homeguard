@@ -1,0 +1,37 @@
+* {
+    font-family: "MartianMonoNerdFont";
+    font-weight: bold;
+}
+
+window {
+    background-color: rgba(30, 30, 30, 0.85);
+}
+
+#clock-time {
+    font-size: 48px;
+    color: #ffffff;
+    margin-bottom: 4px;
+}
+
+#clock-date {
+    font-size: 14px;
+    color: #b48ead;
+    margin-bottom: 24px;
+}
+
+entry {
+    background-color: #323232;
+    color: #ffffff;
+    border: 2px solid #b48ead;
+    border-radius: 0px;
+    padding: 6px 12px;
+}
+
+entry:focus {
+    border-color: #a3be8c;
+}
+
+#error-label {
+    color: #bf616a;
+    font-size: 12px;
+}
