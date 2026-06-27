@@ -3,12 +3,12 @@
 <table border="0">
   <tr>
     <td align="center">
-      <img src="./assets/mint_i3.png" width="100%" alt="i3_mint"/><br/>
-      <b>Linux Mint with i3wm on 1920x1080 </b>
+      <img src="./assets/sway_debian_image.png" width="100%" alt="sway_debian"/><br/>
+      <b>Debian with swaywm </b>
     </td>
     <td align="center">
       <img src="./assets/gentoo_desktop.png" width="100%" alt="Image 2 description"/><br/>
-      <b>Gentoo Linux with i3wm on 1366x768 </b>
+      <b>Gentoo with i3wm </b>
     </td>
   </tr>
 </table>
