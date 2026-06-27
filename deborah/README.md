@@ -4,53 +4,77 @@
 
 > (incomplete, will add more at some point)
 
-Here is the table list for the packages/tools/utilities that I use, sorted with package name and whether it is essential.
+Here is the table list for the packages/tools/utilities that I use.
 
-| Package Name | Essential? | 
-| ------------ | ---------- | 
-| gcc          | yes        | 
-| curl         | depends    |
-| git          | yes        |
-| vim          | preference |
-| tmux         | depends    |
-| ttf-mscorefonts-installer | recommended for better office-suit font support |
-| fonts-noto | yes |
-| fonts-noto-cjk | yes |
-| fonts-noto-cjk-extra | yes |
-| fonts-noto-color-emoji | yes |
-| fonts-noto-core | yes |
-| i3 | totally
-| i3status | yes |
-| i3lock | depends |
-| j4-dmenu-desktop | yes, but can use rofi or standard dmenu |
-| picom | yes |
-| dunst | yes |
-| feh | if using wallpaper |
-| brightnessctl | yes, if using laptop |
-| xinit | depends |
-| alsa-utils | yes |
-| pavucontrol | optional |
-| lxappearance | yes |
-| arc-theme | yes |
-| papirus-icon-theme | yes |
-| unzip | yes |
-| lxpolkit | optional |
-| mousepad | yes |
-| flameshot | yes |
-| xclip | yes |
-| 7zip | yes |
-| obs-studio | yes |
-| thunar | yes |
-| pulseaudio | yes |
-| network-manager | recommended for easier setup |
-| redshift | optional |
-| mpv | yes, can also use vlc |
-| xfce4-terminal | yes |
-| btop | yes |
+>[!WARNING]
+> Hyperlinked packages are ***not*** in the debian repos, you will need to download their *.deb*, or through the tarball. Know your risks when downloading third-party applications as these are not maintained by Debian.
 
-# Brave Origin
+| Package | What for? | Needed? |
+| ------- | --------- | ------- |
+| acpi | Battery Information | Yes, for laptops |
+| adb | Android Debug Bridge | Depends on your use case |
+| alsa-utils | Audio | Yes |
+| [android-studio](https://developer.android.com/studio/install) | Android Development | No, personal use |
+| aptitude | Package Management | No, but recommended for safer system upgrades |
+| arc-theme | Icon Theme | Yes |
+| [brave-origin](https://brave.com/origin/) | Web Browsing | No, Firefox and Chromium are some of the alternatives |
+| brightnessctl | Brightness Control | Yes, for laptops |
+| build-essential | Development Package Set | No, unless doing development (e.g compiling, programming) |
+| [packettracer](https://www.netacad.com/cisco-packet-tracer) | Networking | No, personal use (requires account) |
+| [discord](https://discord.com/) | Internet Messaging | No |
+| duf | Disk Usage Utility | Optional |
+| fasfetch | Display System Information | No |
+| ffmpegthumbnailer | Video Thumbnail Preview (for file managers) | Yes |
+| flatpak | Sanboxed Applications | No |
+| foot | Terminal Emulator | Yes |
+| git | Version Control System | Yes |
+| grim | Screenshot Utility | Yes |
+| grimshot | Screenshot Utility | Yes |
+| gtklock | Lock Screen | Optional |
+| htop | System Monitor | Yes |
+| [localsend](https://localsend.org/) | Share files through Wi-Fi | Yes |
+| mpv | Video Player | Yes |
+| mupdf | PDF Viewer | Yes |
+| nwg-look | GTK Settings | Yes |
+| obs-tudio | Screen Recorder | Yes |
+| pipewire | Sound Server | Yes |
+| pipewire-pulse | Compatibility layer for PulseAudio | Yes |
+| powertop | Observe battery usage | Optional |
+| preload | Pre-load applications that you might frequently use | Yes, for HDDs |
+| screenkey | Record key inputs on your screen | Optional |
+| slurp | Screenshot Utility | Yes |
+| swappy | Screenshot Utility with simple image manipulation | Yes |
+| sway | Tiling Window Manager | Yes |
+| swaybg | Set desktop wallpaper | Yes |
+| swayimg | View images from file manager | Yes |
+| thunar | File Manager | Yes |
+| thunar-volman | Detect mounted drives | Yes |
+| thunderbird | Mailing App | Yes |
+| tlp | Battery Management | Yes, if using laptop |
+| tofi | Application Launcher | Yes |
+| tree | List file hierarchy | No |
+| unzip | File Utility | Yes |
+| vim | Text Editor | Yes |
+| waybar | Status Bar | Yes |
+| wayland-protocol |  Communication Protocol | Yes |
+| wireplumber | Sound Server | Yes |
+| wl-clipboard | Copy and Pasting Utility | Yes |
+| xdg-desktop-portal*(gtk,wlr) | Portals for Applications | Yes |
+| xdg-utils | App Integration for Desktop | Yes |
+| xwayland | Allow programs running through X11 | Optional |
+| zram-tools | Userspace tools | Recommended |
 
-Whether you'd install from outside of the Debian repository is up to you. Chromium and Firefox-ESR are two of the known browsers that exists in the debian repository.
+| Font Packs |
+| ---------- |
+| fonts-font-awesome |
+| fonts-freefont-ttf |
+| fonts-liberation |
+| fonts-noto |
+| fonts-noto-cjk |
+| fonts-noto-cjk-extra |
+| fonts-noto-color-emoji |
+| fonts-noto-extra |
+| ttf-mscorefonts-installer |
 
 Helpful stuff:
 
