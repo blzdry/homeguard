@@ -1,0 +1,12 @@
+# Set sudo timeout for X minutes (where X is the desired number, e.g 5 for 5 minutes)
+Defaults    timestamp_timeout=5
+# Use the root password instead of user's password (must set a root password first before doing this)
+Defaults    rootpw
+# Security setting - only allow the actual user to execute sudo
+Defaults    requiretty
+# Enable password echo through asterisks (*)
+Defaults    env_reset,pwfeedback
+# (Optional) Make sudo insult you whenver you enter your password incorrect
+Defaults    insults
+# (Optional) Customize your password prompt
+Defaults    passprompt="Can I have the password: "
