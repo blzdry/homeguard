@@ -1,0 +1,26 @@
+{ config, pkgs, ... }:
+
+{
+  boot.plymouth = {
+    enable = true;
+    theme = "bgrt";
+  };
+
+  boot.initrd.systemd.enable = true;
+  boot.initrd.verbose = false;
+  boot.consoleLogLevel = 0;
+
+  boot.kernelParams = [
+    "quiet"
+    "splash"
+    "boot.shell_on_fail"
+    "loglevel=3"
+    "rd.systemd.show_status=false"
+    "rd.udev.log_level=3"
+    "udev.log_priority=3"
+  ];
+
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+}
+
+
