@@ -2,20 +2,25 @@
 
 <table border="0">
   <tr>
-    <td align="center">
+    <td>
       <img src="./assets/sway_debian_image.png" width="100%" alt="sway_debian"/><br/>
-      <b>Debian with swaywm </b>
+      <b>SwayWM with Debian </b>
     </td>
-    <td align="center">
-      <img src="./assets/gentoo_desktop.png" width="100%" alt="Image 2 description"/><br/>
-      <b>Gentoo with i3wm </b>
+    <td>
+      <img src="./assets/gentoo_desktop.png" width="100%" alt="gentoo_desktop"/><br/>
+      <b>i3wm with Gentoo</b>
+    </td>
+    <td>
+      <img src="./assets/nix-gnome.png" width="100%" alt="nix_gnome"/><br/>
+      <b>NixOS with GNOME</b>
     </td>
   </tr>
 </table>
 
-# I've listed some documentation or things that I have used on their respective folders. Check here for [epoch](./epoch) and [deborah](./deborah)
+### I've listed some documentation or things that I have used on their respective folders. <br>
+### Check here for [[epoch]](./epoch) and [[deborah]](./deborah)
 
-  This theme heavily uses the [Arc Theme](https://github.com/arc-design/arc-theme), same goes to the terminal theme.
+#### Just in: I am now using NixOS, so documentation for Nix will be added soon.
 
 > The "unmaintained" folder is my archived folder, it hasn't been used for a while so they may or may not work.
 
@@ -31,3 +36,4 @@ Sources used:
 - [Bash Syntax](https://www.w3schools.com/bash/bash_syntax.php)
 - [Fastfetch](https://github.com/fastfetch-cli/fastfetch)
 - [Arc-Theme](https://github.com/arc-design/arc-theme)
+- [NixOS Official Wiki](https://wiki.nixos.org/wiki/NixOS_Wiki)
