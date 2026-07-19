@@ -42,7 +42,7 @@
     papirus-icon-theme
     gnome-tweaks
     gnome-extension-manager
-    git
+    gitFull
     gh
     nodejs_24
     nix-direnv

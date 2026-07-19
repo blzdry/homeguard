@@ -40,6 +40,15 @@
     LC_TIME = "en_PH.UTF-8";
   };
 
+  programs.git = {
+    enable = true;
+    config = {
+      credential = {
+        helper = "${pkgs.gh}/bin/gh auth git-credential";
+       };
+      };
+    };
+
   services.xserver.xkb = {
     layout = "us";
     variant = "";
