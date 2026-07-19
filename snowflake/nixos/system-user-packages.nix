@@ -3,7 +3,7 @@
 {
     users.users."blizzard" = {
     isNormalUser = true;
-    description = "Jonathan";
+    description = "Jael Patajo Gonzal";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
     brave
@@ -26,6 +26,7 @@
     noto-fonts-color-emoji
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
+    inter
   ];
 
   environment.gnome.excludePackages = with pkgs; [

@@ -3,7 +3,7 @@
 {
 
   services.libinput.enable = false;
-  services.printing.enable = true;
+  services.printing.enable = false;
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
   services.gnome.core-apps.enable = false;
