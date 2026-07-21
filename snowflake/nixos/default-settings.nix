@@ -2,6 +2,8 @@
 
 {
 
+    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   services.libinput.enable = false;
   services.printing.enable = false;
   services.displayManager.gdm.enable = true;
@@ -16,7 +18,7 @@
   environment.variables.EDITOR = "vim";
   nixpkgs.config.allowUnfree = true;
   
-  networking.hostName = "nixos";
+  networking.hostName = "elderhailstorm";
   # networking.wireless.enable = true;  
   # services.openssh.enable = true;
 
