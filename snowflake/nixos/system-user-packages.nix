@@ -17,6 +17,7 @@
     ghostty
     mousepad
     localsend
+    onlyoffice-desktopeditors
     ];
   };
 
@@ -39,6 +40,9 @@
     ffmpeg-headless
     ffmpegthumbnailer
     vim
+    bat
+    tree
+    btop
     papirus-icon-theme
     gnome-tweaks
     gnome-extension-manager
