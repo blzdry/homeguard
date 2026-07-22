@@ -4,7 +4,7 @@
     users.users."blizzard" = {
     isNormalUser = true;
     description = "Jael Patajo Gonzal";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
     packages = with pkgs; [
     brave
     obs-studio
@@ -35,6 +35,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    eog
     nautilus
     sushi
     ffmpeg-headless

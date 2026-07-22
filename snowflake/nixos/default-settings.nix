@@ -4,6 +4,7 @@
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  virtualisation.libvirtd.enable = true;
   services.libinput.enable = false;
   services.printing.enable = false;
   services.displayManager.gdm.enable = true;
