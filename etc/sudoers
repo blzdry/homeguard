@@ -2,8 +2,6 @@
 Defaults    timestamp_timeout=5
 # Use the root password instead of user's password (must set a root password first before doing this)
 Defaults    rootpw
-# Security setting - only allow the actual user to execute sudo
-Defaults    requiretty
 # Enable password echo through asterisks (*)
 Defaults    env_reset,pwfeedback
 # (Optional) Make sudo insult you whenver you enter your password incorrect
