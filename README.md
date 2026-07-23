@@ -4,14 +4,14 @@
   <tr>
     <td>
       <img src="./assets/sway_debian_image.png" width="100%" alt="sway_debian"/><br/>
-      <b>SwayWM with Debian </b>
+      <b>Debian with SwayWM</b>
     </td>
     <td>
       <img src="./assets/gentoo_desktop.png" width="100%" alt="gentoo_desktop"/><br/>
-      <b>i3wm with Gentoo</b>
+      <b>Gentoo with i3wm</b>
     </td>
     <td>
-      <img src="./assets/nix-gnome.png" width="100%" alt="nix_gnome"/><br/>
+      <img src="./assets/nix-mac.png" width="100%" alt="nix_gnome"/><br/>
       <b>NixOS with GNOME</b>
     </td>
   </tr>
