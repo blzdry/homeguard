@@ -4,7 +4,6 @@
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  virtualisation.libvirtd.enable = true;
   services.libinput.enable = false;
   services.printing.enable = false;
   services.displayManager.gdm.enable = true;
@@ -41,6 +40,14 @@
     LC_PAPER = "en_PH.UTF-8";
     LC_TELEPHONE = "en_PH.UTF-8";
     LC_TIME = "en_PH.UTF-8";
+  };
+
+  boot.zswap = {
+      enable = true;
+      acceptThresholdPercent = 90;
+      compressor = "zstd";
+      maxPoolPercent = 25;
+      shrinkerEnabled = true;
   };
 
   programs.git = {

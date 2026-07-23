@@ -4,7 +4,7 @@
     users.users."blizzard" = {
     isNormalUser = true;
     description = "Jael Patajo Gonzal";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
+    extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
     brave
     obs-studio
@@ -18,6 +18,9 @@
     mousepad
     localsend
     onlyoffice-desktopeditors
+    blender
+    cisco-packet-tracer_9
+    jetbrains.rust-rover
     ];
   };
 
@@ -51,5 +54,10 @@
     gh
     nodejs_24
     nix-direnv
+    rustc
+    cargo
+    rust-analyzer
+    rustfmt
+    clippy
   ];
 }
