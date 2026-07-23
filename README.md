@@ -30,6 +30,7 @@
 │   ├── gentoo_desktop.png
 │   ├── mint_i3.png
 │   ├── nix-gnome.png
+│   ├── nix-mac.png
 │   └── sway_debian_image.png
 ├── deborah
 │   ├── dunst
@@ -146,6 +147,8 @@
 │   │   ├── config-sudo.nix
 │   │   ├── configuration.nix
 │   │   ├── default-settings.nix
+│   │   ├── flake.lock
+│   │   ├── flake.nix
 │   │   └── system-user-packages.nix
 │   └── README.md
 ├── unmaintained
