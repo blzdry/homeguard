@@ -74,5 +74,18 @@
     #jack.enable = true;
 };
 
+  hardware.graphics = {
+  enable = true;
+  extraPackages = with pkgs; [
+    intel-vaapi-driver
+  ];
+};
+
+# Force the system to prioritize the legacy i965 driver backend
+  environment.variables = {
+    LIBVA_DRIVER_NAME = "i965";
+};
+
   system.stateVersion = "26.05";
 }
+

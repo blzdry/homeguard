@@ -47,13 +47,14 @@
     bat
     tree
     btop
-    papirus-icon-theme
     gnome-tweaks
     gnome-extension-manager
     gitFull
+    ffmpeg-full
     gh
     nodejs_24
     nix-direnv
+    emacs
     rustc
     cargo
     rust-analyzer
