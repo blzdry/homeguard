@@ -1,22 +1,5 @@
 ## My personal set of configurations for linux-related stuff.
 
-<table border="0">
-  <tr>
-    <td>
-      <img src="./assets/sway_debian_image.png" width="100%" alt="sway_debian"/><br/>
-      <b>Debian with SwayWM</b>
-    </td>
-    <td>
-      <img src="./assets/gentoo_desktop.png" width="100%" alt="gentoo_desktop"/><br/>
-      <b>Gentoo with i3wm</b>
-    </td>
-    <td>
-      <img src="./assets/nix-mac.png" width="100%" alt="nix_gnome"/><br/>
-      <b>NixOS with GNOME</b>
-    </td>
-  </tr>
-</table>
-
 ### I've listed some documentation or things that I have used on their respective folders. <br>
 ### Check here for [[epoch]](./epoch), [[deborah]](./deborah), and [[snowflake]](./snowflake).
 
