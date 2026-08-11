@@ -6,7 +6,23 @@
 ## Repository Structure
 
 ```
-.
+homeguard/
+├── arch
+│   ├── dunst
+│   │   └── dunstrc
+│   ├── flameshot
+│   │   └── flameshot.ini
+│   ├── i3
+│   │   ├── archlinux.jpg
+│   │   ├── config
+│   │   └── scripts
+│   │       └── powermenu.sh
+│   ├── i3status
+│   │   └── config
+│   ├── picom
+│   │   └── picom.conf
+│   └── psd
+│       └── psd.conf
 ├── assets
 │   ├── demo.png
 │   ├── desktop-i3.png
@@ -121,6 +137,11 @@
 │   └── xob
 │       └── styles.cfg
 ├── etc
+│   ├── chrome
+│   │   └── userChrome.css
+│   ├── nvim
+│   │   ├── init.lua
+│   │   └── lazy-lock.json
 │   └── sudoers
 ├── README.md
 ├── snowflake
