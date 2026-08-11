@@ -3,7 +3,7 @@
 <channel name="xfce4-terminal" version="1.0">
   <property name="overlay-scrolling" type="bool" value="true"/>
   <property name="misc-show-unsafe-paste-dialog" type="bool" value="false"/>
-  <property name="font-name" type="string" value="ZedMono Nerd Font Bold 18"/>
+  <property name="font-name" type="string" value="MartianMono Nerd Font Bold 18"/>
   <property name="misc-menubar-default" type="bool" value="false"/>
   <property name="color-foreground" type="string" value="#dcdcdc"/>
   <property name="color-background" type="string" value="#2c2c2c"/>

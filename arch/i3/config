@@ -17,7 +17,8 @@ tiling_drag modifier titlebar
 # ┏┓┓┏╋┏┓┏╋┏┓┏┓╋
 # ┗┻┗┻┗┗┛┛┗┗┻┛ ┗
 
-exec --no-startup-id feh --bg-scale $HOME/.config/i3/gray.jpg
+exec --no-startup-id feh --bg-scale $HOME/.config/i3/archlinux.jpg
+exec_always --no-startup-id dunst
 exec --no-startup-id dex --autostart --environment i3
 exec_always --no-startup-id picom -b
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
@@ -188,6 +189,7 @@ bindsym $mod+r mode "resize"
 
 bar {
         status_command i3status | i3status-title-on-bar --color '#02FFBF' 
+	position top
         colors {
 	    background 	#141c21
 	    statusline 	#FFFADA

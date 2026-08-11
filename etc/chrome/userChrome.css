@@ -1,0 +1,111 @@
+:root {
+  --tab-border-radius: 0px !important;
+  --toolbarbutton-border-radius: 0px !important;
+  --button-border-radius: 0px !important;
+  --border-radius-medium: 0px !important;
+  --arrowpanel-border-radius: 0px !important;
+  --arrowpanel-menuitem-border-radius: 0px !important;
+}
+
+menupopup,
+tooltip {
+  border-radius: 0 !important;
+}
+
+
+/* Main application menu */
+#PanelUI-menu-button {
+  display: none !important;
+}
+
+/* Extensions / puzzle-piece button 
+#unified-extensions-button {
+  display: none !important;
+}*/
+
+/* Navigation buttons */
+#back-button,
+#forward-button,
+#reload-button,
+#stop-button {
+  display: none !important;
+}
+
+/* Bookmark / star button */
+#star-button-box,
+#star-button {
+  display: none !important;
+}
+
+/* Remove tab close buttons */
+.tabbrowser-tab .tab-close-button {
+  display: none !important;
+}
+
+
+#nav-bar .toolbarbutton-1 {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+
+:root {
+  --uc-bottom-toolbar-height: 40px;
+}
+
+#browser {
+  margin-bottom: var(--uc-bottom-toolbar-height) !important;
+}
+
+#nav-bar {
+  position: fixed !important;
+
+  bottom: 0 !important;
+  left: 0 !important;
+
+  width: 100% !important;
+  height: var(--uc-bottom-toolbar-height) !important;
+
+  z-index: 1000 !important;
+
+  margin: 0 !important;
+  border-top: none !important;
+}
+
+#nav-bar > .toolbar-items {
+  height: 100% !important;
+}
+
+#urlbar-container {
+  min-width: 0 !important;
+}
+
+#urlbar {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+#nav-bar {
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+}
+
+#navigator-toolbox,
+#TabsToolbar,
+#nav-bar,
+#PersonalToolbar,
+#sidebar-box,
+menupopup,
+tooltip {
+  transition: none !important;
+  animation: none !important;
+}
+
+:root[inFullscreen] #browser {
+  margin-bottom: 0 !important;
+}
+
+:root[inFullscreen] #nav-bar {
+  position: static !important;
+}
