@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+:root {
+  background-color: #FFFFFF;
+}
+
+@keyframes gradientTest {
+  0% {
+    border-color: green;
+  } 100% {
+    border-color: yellow;
+  }
+}
