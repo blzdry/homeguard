@@ -9,12 +9,12 @@ order += "battery 0"
 order += "tztime local"
 
 tztime local {
-    format = "%A, %B %d, %Y %I:%M %p"
+    format = "| %A, %B %d, %Y %I:%M %p |"
 }   
 
 
 battery 0 {
-    format = "%status %percentage "
+    format = "| %status %percentage"
     integer_battery_capacity = true
     format_down = "No battery"
     status_chr = "Charging at:"

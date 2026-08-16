@@ -145,6 +145,7 @@ require("lazy").setup({
     config = function()
       require("nvim-treesitter.configs").setup({
         ensure_installed = { "c", "cpp", "lua", "vim", "vimdoc" },
+        auto_install = true,
         highlight = { enable = true },
       })
     end
@@ -176,26 +177,55 @@ require("lazy").setup({
       vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Find files' })
       vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Live grep' })
     end
+  }, -- <-- Added a comma here so we can add more plugins
+
+  -- LSP Management (Mason)
+  {
+    "williamboman/mason.nvim",
+    dependencies = {
+      "williamboman/mason-lspconfig.nvim",
+      "neovim/nvim-lspconfig",
+    },
+    config = function()
+      require("mason").setup()
+      
+      require("mason-lspconfig").setup({
+        -- Pre-load LSPs for C, React, and Tailwind
+        ensure_installed = { "clangd", "ts_ls", "tailwindcss", "html", "cssls" },
+      })
+
+      -- Set global capabilities for autocomplete using Neovim's native 0.11+ API
+      -- This applies automatically to all LSPs installed by Mason
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      vim.lsp.config("*", {
+        capabilities = capabilities,
+      })
+    end
+  },
+
+  -- Colorscheme
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000, 
+    config = function()
+      vim.cmd([[colorscheme tokyonight-night]])
+    end,
   }
+
 }, {
 -- disable luarocks
   rocks = { enabled = false } 
 })
 
 
--- neovim native lsp
-vim.lsp.config("clangd", {
-    cmd = { "clangd", "--background-index", "--clang-tidy" },
-    capabilities = require("cmp_nvim_lsp").default_capabilities()
-})
-vim.lsp.enable("clangd")
-
+-- Universal LSP Keybinds (Native Neovim, so it stays outside the Lazy setup)
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
         local opts = { buffer = args.buf }
         vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
         vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
         vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
+        vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts) 
     end
 })
-
