@@ -1,24 +1,43 @@
 ## My personal set of configurations for linux-related stuff.
 
 ### I've listed some documentation or things that I have used on their respective folders. <br>
-### Check here for [[epoch]](./epoch), [[deborah]](./deborah), and [[snowflake]](./snowflake).
+### Check here for:
+- [[epoch]](./epoch)
+- [[deborah]](./deborah)
+- [[snowflake]](./snowflake)
 
 ## Repository Structure
+
+<details>
+    <summary> Shortened to drop-down as the hierarchy itself is too long </summary>
 
 ```
 homeguard/
 ├── arch
+│   ├── alacritty
+│   │   └── alacritty.toml
 │   ├── dunst
 │   │   └── dunstrc
 │   ├── flameshot
 │   │   └── flameshot.ini
 │   ├── i3
 │   │   ├── archlinux.jpg
+│   │   ├── c-and-wilbur.png
+│   │   ├── c-fetch.png
 │   │   ├── config
-│   │   └── scripts
-│   │       └── powermenu.sh
+│   │   ├── c-wars.png
+│   │   ├── scripts
+│   │   │   └── powermenu.sh
+│   │   ├── sources
+│   │   │   ├── 001_autoStart
+│   │   │   ├── 002_keyBinds
+│   │   │   ├── 003_windowRules
+│   │   │   ├── 004_statusBar
+│   │   │   └── 005_scriptStart
+│   │   └── stamp-blue.jpeg
 │   ├── i3status
-│   │   └── config
+│   │   ├── config
+│   │   └── config.battery
 │   ├── picom
 │   │   └── picom.conf
 │   └── psd
@@ -139,10 +158,118 @@ homeguard/
 ├── etc
 │   ├── chrome
 │   │   └── userChrome.css
+│   ├── GIMP
+│   │   └── 3.2
+│   │       ├── action-history
+│   │       ├── colorrc
+│   │       ├── contextrc
+│   │       ├── controllerrc
+│   │       ├── devicerc
+│   │       ├── dockrc
+│   │       ├── extensionrc
+│   │       ├── filters
+│   │       │   └── GimpBrightnessContrastConfig.settings
+│   │       ├── gimprc
+│   │       ├── internal-data
+│   │       │   └── custom.ggr
+│   │       ├── modifiersrc
+│   │       ├── parasiterc
+│   │       ├── pluginrc
+│   │       ├── plug-in-settings
+│   │       │   ├── GimpProcedureConfigRun-file-jpeg-export.last
+│   │       │   ├── GimpProcedureConfigRun-file-jpeg-load.last
+│   │       │   ├── GimpProcedureConfigRun-file-png-export.last
+│   │       │   ├── GimpProcedureConfigRun-file-png-load.last
+│   │       │   ├── GimpProcedureConfigRun-file-svg-load.last
+│   │       │   └── GimpProcedureConfigRun-plug-in-unit-editor.last
+│   │       ├── profilerc
+│   │       ├── sessionrc
+│   │       ├── shortcutsrc
+│   │       ├── splashes
+│   │       │   └── splash-screen-2025-v2.png
+│   │       ├── tags.xml
+│   │       ├── templaterc
+│   │       ├── theme.css
+│   │       ├── tool-options
+│   │       │   ├── gimp-airbrush-tool
+│   │       │   ├── gimp-align-tool
+│   │       │   ├── gimp-brightness-contrast-tool
+│   │       │   ├── gimp-bucket-fill-tool
+│   │       │   ├── gimp-by-color-select-tool
+│   │       │   ├── gimp-cage-tool
+│   │       │   ├── gimp-clone-tool
+│   │       │   ├── gimp-color-picker-tool
+│   │       │   ├── gimp-convolve-tool
+│   │       │   ├── gimp-crop-tool
+│   │       │   ├── gimp-curves-tool
+│   │       │   ├── gimp-dodge-burn-tool
+│   │       │   ├── gimp-ellipse-select-tool
+│   │       │   ├── gimp-eraser-tool
+│   │       │   ├── gimp-flip-tool
+│   │       │   ├── gimp-foreground-select-tool
+│   │       │   ├── gimp-free-select-tool
+│   │       │   ├── gimp-fuzzy-select-tool
+│   │       │   ├── gimp-gegl-tool
+│   │       │   ├── gimp-gradient-tool
+│   │       │   ├── gimp-handle-transform-tool
+│   │       │   ├── gimp-heal-tool
+│   │       │   ├── gimp-ink-tool
+│   │       │   ├── gimp-iscissors-tool
+│   │       │   ├── gimp-levels-tool
+│   │       │   ├── gimp-measure-tool
+│   │       │   ├── gimp-move-tool
+│   │       │   ├── gimp-mypaint-brush-tool
+│   │       │   ├── gimp-offset-tool
+│   │       │   ├── gimp-operation-tool
+│   │       │   ├── gimp-paintbrush-tool
+│   │       │   ├── gimp-path-tool
+│   │       │   ├── gimp-pencil-tool
+│   │       │   ├── gimp-perspective-clone-tool
+│   │       │   ├── gimp-perspective-tool
+│   │       │   ├── gimp-rect-select-tool
+│   │       │   ├── gimp-rotate-tool
+│   │       │   ├── gimp-scale-tool
+│   │       │   ├── gimp-shear-tool
+│   │       │   ├── gimp-smudge-tool
+│   │       │   ├── gimp-text-tool
+│   │       │   ├── gimp-threshold-tool
+│   │       │   ├── gimp-transform-3d-tool
+│   │       │   ├── gimp-unified-transform-tool
+│   │       │   ├── gimp-vector-tool
+│   │       │   ├── gimp-warp-tool
+│   │       │   └── gimp-zoom-tool
+│   │       ├── toolrc
+│   │       └── unitrc
 │   ├── nvim
 │   │   ├── init.lua
 │   │   └── lazy-lock.json
-│   └── sudoers
+│   ├── sudoers
+│   └── vite-website
+│       └── my-website-profile
+│           ├── eslint.config.js
+│           ├── index.html
+│           ├── package.json
+│           ├── package-lock.json
+│           ├── public
+│           │   ├── favicon.svg
+│           │   └── icons.svg
+│           ├── README.md
+│           ├── src
+│           │   ├── App.css
+│           │   ├── App.jsx
+│           │   ├── assets
+│           │   │   ├── hero.png
+│           │   │   ├── jpg.jpg
+│           │   │   ├── react.svg
+│           │   │   └── vite.svg
+│           │   ├── components
+│           │   │   ├── footerbar.jsx
+│           │   │   ├── loginmodal.jsx
+│           │   │   ├── navbar.jsx
+│           │   │   └── studentcard.jsx
+│           │   ├── index.css
+│           │   └── main.jsx
+│           └── vite.config.js
 ├── README.md
 ├── snowflake
 │   ├── nixos
@@ -169,6 +296,7 @@ homeguard/
     ├── nix_dark.png
     └── tree.jpg
 ```
+</details>
 
 > The "unmaintained" folder is my archived folder, it hasn't been used for a while so they may or may not work.
 
@@ -179,10 +307,11 @@ Sources used:
 - [Debian Packages](https://www.debian.org/distrib/packages)
 - [NVIDIA Graphics Drivers](https://wiki.debian.org/NvidiaGraphicsDrivers)
 - [This stackoverflow question](https://stackoverflow.com/questions/40986340/how-to-wget-a-list-of-urls-in-a-text-file)
-- [CTT's Debian-titus script](https://github.com/ChrisTitusTech/Debian-titus/blob/main/install.sh)
 - [Bash Git Prompt](https://github.com/magicmonty/bash-git-prompt)
 - [Bash Syntax](https://www.w3schools.com/bash/bash_syntax.php)
 - [Fastfetch](https://github.com/fastfetch-cli/fastfetch)
 - [Arc-Theme](https://github.com/arc-design/arc-theme)
 - [NixOS Official Wiki](https://wiki.nixos.org/wiki/NixOS_Wiki)
 - [NixOS Packages](https://search.nixos.org/packages)
+- [MD Cheat Sheet](https://github.com/leighTOR/md-cheatsheet)
+- [Arch Linux Wiki](https://wiki.archlinux.org/title/Main_page)
